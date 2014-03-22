@@ -11,4 +11,9 @@ rf.StandaloneDashboard(function (db) {
     c1.addNumericRangeFilter('units', 'Units in Stock');
 
     db.addComponent(c1);
+
+    c1.bind('submit', function() {
+        var inputValues = c1.getAllInputValues();
+        console.log(inputValues);
+    });
 });
