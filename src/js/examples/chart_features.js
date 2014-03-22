@@ -1,4 +1,6 @@
-
+/*{
+    "name": "Chart Features"
+}*/
 StandaloneDashboard(function(db) {
     var c1 = new ChartComponent();
     c1.setCaption ("Column Chart");
