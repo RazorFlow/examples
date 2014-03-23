@@ -1,8 +1,6 @@
 
 <?php
 
-require "../src/razorflow.php";
-
 class SampleDashboard extends StandaloneDashboard {
   public function initialize(){
     

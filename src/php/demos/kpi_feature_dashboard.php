@@ -1,7 +1,5 @@
 <?php
 
-require "../src/razorflow.php";
-
 class SampleDashboard extends StandaloneDashboard {
   public function initialize(){
     $kpi1 = new KPIComponent("kpi1");
