@@ -3,7 +3,7 @@
 class SampleDashboard extends StandaloneDashboard {
   protected $pdo;
   public function initialize(){
-  	$this->pdo = new PDO("sqlite:".realpath("../../../fixtures/databases/Chinook_Sqlite.sqlite"));
+  	$this->pdo = new PDO("sqlite:fixtures/databases/Chinook_Sqlite.sqlite");
   }
 
   private function getTopArtists () {
@@ -23,6 +23,7 @@ class SampleDashboard extends StandaloneDashboard {
   }
 
   public function buildDashboard () {
+    $this->setDashboardTitle ("SQL Demo Dashboard");
   	$chart = new ChartComponent ('c1');
   	$chart->setDimensions (6, 6);
   	$chart->setCaption ("Top 5 Artists by Revenue");
