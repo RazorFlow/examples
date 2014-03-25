@@ -10,7 +10,7 @@ class SampleDashboard extends StandaloneDashboard {
 
     $this->addComponent ($chart);
 
-    $chart->bindToEvent ("itemClick", array($chart), "handleItemClick");
+    $chart->onItemClicked (array($chart), "handleItemClick");
   }
 
   public function handleItemClick ($source, $targets, $params) {
