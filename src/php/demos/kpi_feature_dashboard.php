@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $kpi1 = new KPIComponent("kpi1");
     $kpi1->setCaption("Average Monthly Sales");
     $kpi1->setDimensions (4, 2);

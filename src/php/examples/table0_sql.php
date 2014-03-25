@@ -3,7 +3,7 @@
 class SampleDashboard extends StandaloneDashboard {
   protected $pdo;
   public function initialize(){
-  	$this->pdo = new PDO("sqlite:".realpath("/Users/swaroop/rf/examples/fixtures/databases/Chinook_Sqlite.sqlite"));
+  	$this->pdo = new PDO("sqlite:".realpath("../../../fixtures/databases/Chinook_Sqlite.sqlite"));
   }
 
   private function getEmployees () {
@@ -57,8 +57,7 @@ class SampleDashboard extends StandaloneDashboard {
     $filter->setDimensions (4, 4);
     $filter->addTextFilter ("contains", "City Contains");
 
-    $filter->bindToEvent ("submit", array($table), "handleEmployeesSubmit");
-
+    $filter->onApplyClicked (array($table), "handleEmployeesSubmit");
 
     $this->addComponent($filter);
   }

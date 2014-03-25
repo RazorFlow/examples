@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $chart = new ChartComponent("chart1");
     $chart->setCaption("My First Chart");
     $chart->setDimensions (4, 4);
@@ -10,7 +10,7 @@ class SampleDashboard extends StandaloneDashboard {
 
     $this->addComponent ($chart);
 
-    $chart->bindToEvent ("itemClick", array($chart), "handleItemClick");
+    $chart->onItemClicked (array($chart), "handleItemClick");
   }
 
   public function handleItemClick ($source, $targets, $params) {

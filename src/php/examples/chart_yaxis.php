@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $chart = new ChartComponent("my_first_chart");
     $chart->setCaption("My First Chart");
     $chart->setYAxis("Sales", array(

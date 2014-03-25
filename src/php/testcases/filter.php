@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-    public function initialize () {
+    public function buildDashboard () {
         $filter = new FilterComponent("filter");
         $filter->setCaption("Test Filter Component");
         $filter->setDimensions(4, 4);

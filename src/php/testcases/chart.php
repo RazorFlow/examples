@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-    public function initialize () {
+    public function buildDashboard () {
         $chart1 = new ChartComponent('my_chart1');
         $chart1->setDimensions(6,4);
         $chart1->setCaption('Top 10 Genres by sales');

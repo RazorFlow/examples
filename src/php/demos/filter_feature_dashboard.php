@@ -2,7 +2,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     
     $categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     $c1 = new TableComponent("table1");

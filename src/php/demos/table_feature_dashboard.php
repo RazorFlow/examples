@@ -2,7 +2,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $table = new TableComponent("table1");
     $table->setCaption("List of items in stock");
     $table->setDimensions (12, 6);
