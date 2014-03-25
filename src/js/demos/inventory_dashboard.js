@@ -123,9 +123,12 @@ StandaloneDashboard(function (db) {
     db.addComponent(c12);
 
     $.ajax({
-        url: '/transfer/products.json',
+        url: '/fixtures/products.json',
         type: 'GET',
         success: function(products) {
+            if (_.isString(products)) {
+                products = JSON.parse(products);
+            }
             var inventory = [getProductInventory(products, 'Beverages'), getProductInventory(products, 'Condiments'),
                                 getProductInventory(products, 'Confections'), getProductInventory(products, 'Dairy Products'),
                                 getProductInventory(products, 'Grains/Cereals'), getProductInventory(products, 'Meat/Poultry'),
