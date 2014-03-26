@@ -19,16 +19,16 @@ class SampleDashboard extends StandaloneDashboard {
 
     $this->addComponent ($kpi1);
 
-    // $kpi2 = new KPIComponent("kpi2");
-    // $kpi2->setCaption("Average Monthly Units");
-    // $kpi2->setDimensions (4, 2);
-    // $kpi2->setValue(22);
-    // $kpi2->setSparkValues(
-    //   ['Jan', "Feb", 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    //   [12.31, 10.34, 10.26, 9, 8.21, 13.41, 14.43, 23.31, 13.41, 11.4, 28.34, 29.21]
-    // );
-    //
-    // $this->addComponent ($kpi2);
+    $kpi2 = new KPIComponent("kpi2");
+    $kpi2->setCaption("Average Monthly Units");
+    $kpi2->setDimensions (4, 2);
+    $kpi2->setValue(22);
+    $kpi2->setSparkValues(
+      ['Jan', "Feb", 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      [12.31, 10.34, 10.26, 9, 8.21, 13.41, 14.43, 23.31, 13.41, 11.4, 28.34, 29.21]
+    );
+
+    $this->addComponent ($kpi2);
   }
 }
 
