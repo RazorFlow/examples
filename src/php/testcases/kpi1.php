@@ -6,6 +6,10 @@ class SampleDashboard extends StandaloneDashboard {
         $kpi->setCaption("Hello world");
         $kpi->setValue(42);
         $kpi->setDimensions(4, 4);
+        $kpi->setSparkValues(
+          array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'),
+          array(20, 32, 34, 12, 4, 16)
+        );
         $this->addComponent ($kpi);
 
         $table = new TableComponent('table1');
