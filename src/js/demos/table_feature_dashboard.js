@@ -26,9 +26,12 @@ StandaloneDashboard(function (db) {
     db.addComponent(c1);
 
     $.ajax({
-        url: '/transfer/products.json',
+        url: '/fixtures/products.json',
         type: 'GET',
         success: function(products) {
+            if (_.isString(products)) {
+                products = JSON.parse(products);
+            }
             for(var i=-1; ++i<products.length;) {
                 c1.addRow(products[i], {});
             }

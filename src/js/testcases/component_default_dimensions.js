@@ -1,6 +1,12 @@
-rf.StandaloneDashboard(function (db) {
+StandaloneDashboard(function (db) {
+    var chart = new ChartComponent();
+    chart.setCaption("My First Chart"); 
+    chart.setLabels (["2009", "2010", "2011"])
+    chart.addSeries ("beverages", "Beverages", [1355, 1916, 1150]);
+    chart.addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321]);
+    db.addComponent (chart);
+
     var c1 = new FilterComponent();
-    c1.setDimensions(6,6);
     c1.setCaption('Test Filter Component');
 
     c1.addTextFilter('name', 'Name');
@@ -11,4 +17,11 @@ rf.StandaloneDashboard(function (db) {
     c1.addNumericRangeFilter('units', 'Units in Stock');
 
     db.addComponent(c1);
+
+    var c2 = new KPIComponent();
+    c2.setCaption('Beverages');
+    c2.setValue(559, {
+        numberSuffix: ' units'
+    });
+    db.addComponent(c2);
 });
