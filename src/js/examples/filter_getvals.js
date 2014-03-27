@@ -12,7 +12,7 @@ rf.StandaloneDashboard(function (db) {
 
     db.addComponent(c1);
 
-    c1.bind('submit', function() {
+    c1.onApplyClicked(function() {
         var inputValues = c1.getAllInputValues();
         console.log(inputValues);
     });
