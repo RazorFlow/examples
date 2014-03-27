@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $chart = new ChartComponent("pie_chart");
     $chart->setCaption("A pie chart");
     $chart->setDimensions (4, 4);

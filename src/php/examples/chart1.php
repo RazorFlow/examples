@@ -1,7 +1,7 @@
 <?php
 
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $chart = new ChartComponent("2011_sales");
     $chart->setCaption("2011 Sales");
     $chart->setDimensions (4, 4);
