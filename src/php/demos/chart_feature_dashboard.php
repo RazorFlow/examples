@@ -1,8 +1,15 @@
-
 <?php
 
+/*&
+    {
+        "id": "php_chart_feature_dashboard",
+        "title": "Chart Types",
+        "desc": "Some paragraph of text goes here."
+    } 
+*/
+
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
 
     $chart1 = new ChartComponent('chart1');
     $chart1->setCaption('Top 10 Genres by sales');

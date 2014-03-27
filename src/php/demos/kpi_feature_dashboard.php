@@ -1,7 +1,15 @@
 <?php
 
+/*&
+    {
+        "id": "php_kpi_feature_dashboard",
+        "title": "KPI Types",
+        "desc": "Some paragraph of text goes here."
+    } 
+*/
+
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     $kpi1 = new KPIComponent("kpi1");
     $kpi1->setCaption("Average Monthly Sales");
     $kpi1->setDimensions (4, 2);

@@ -1,8 +1,15 @@
-
 <?php
 
+/*&
+    {
+        "id": "php_filter_feature_dashboard",
+        "title": "Filter In Razorflow",
+        "desc": "Some paragraph of text goes here."
+    } 
+*/
+
 class SampleDashboard extends StandaloneDashboard {
-  public function initialize(){
+  public function buildDashboard(){
     
     $categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     $c1 = new TableComponent("table1");

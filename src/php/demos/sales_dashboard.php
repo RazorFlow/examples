@@ -1,5 +1,13 @@
 <?php
 
+/*&
+    {
+        "id": "php_sales_dashboard",
+        "title": "Sales Dashboard",
+        "desc": "Some paragraph of text goes here."
+    } 
+*/
+
 class SampleDashboard extends StandaloneDashboard {
 
   private function randomGen($num, $max){
@@ -11,7 +19,7 @@ class SampleDashboard extends StandaloneDashboard {
     return $arr;
   }
 
-  public function initialize(){
+  public function buildDashboard(){
     $kpi1 = new KPIComponent("kpi1");
     $kpi1->setCaption("Number of checkouts in 24h");
     $kpi1->setDimensions (3, 2);
