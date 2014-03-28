@@ -3,7 +3,7 @@
 class SampleDashboard extends StandaloneDashboard {
   protected $pdo;
   public function initialize(){
-  	$this->pdo = new PDO("sqlite:".realpath("../../../fixtures/databases/Chinook_Sqlite.sqlite"));
+  	$this->pdo = new PDO("sqlite:fixtures/databases/Chinook_Sqlite.sqlite");
   }
 
   private function getEmployees () {
