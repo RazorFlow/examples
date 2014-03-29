@@ -5,7 +5,7 @@ class SampleDashboard extends StandaloneDashboard {
     $chart = new ChartComponent("my_first_chart");
     $chart->setCaption("My First Chart");
     $chart->setYAxis("Sales", array(
-      "numberPrefix" => "$ "
+      "numberPrefix" => "$"
     ));
     $chart->setDimensions (4, 4);
     $chart->setLabels (["Jan", "Feb", "Mar"]);
