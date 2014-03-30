@@ -57,7 +57,7 @@ class SampleDashboard extends StandaloneDashboard {
     $filter->setDimensions (4, 4);
     $filter->addTextFilter ("contains", "City Contains");
 
-    $filter->onApplyClicked (array($table), "handleEmployeesSubmit");
+    $filter->onApplyClick (array($table), "handleEmployeesSubmit");
 
     $this->addComponent($filter);
   }

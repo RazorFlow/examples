@@ -48,7 +48,7 @@ StandaloneDashboard(function (db) {
             
             c1.unlock();
 
-            c2.onApplyClicked(function() {
+            c2.onApplyClick(function() {
                 var values = c2.getAllInputValues();
                 var rows = products;
                 

@@ -18,7 +18,7 @@ class SampleDashboard extends StandaloneDashboard {
     $chart2->addSeries ("series_1", "Series 1", array(1, 2, 3));
     $this->addComponent ($chart2);
 
-    $chart->onItemClicked (array($chart2), "handleItemClick");
+    $chart->onItemClick (array($chart2), "handleItemClick");
   }
 
   public function handleItemClick ($source, $targets, $params) {

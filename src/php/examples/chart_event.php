@@ -16,7 +16,7 @@ class SampleDashboard extends StandaloneDashboard {
     $kpi->setDimensions(4, 4);
     $this->addComponent ($kpi);
 
-    $chart->onItemClicked (array($kpi), 'handleClick');
+    $chart->onItemClick (array($kpi), 'handleClick');
   }
 
   public function handleClick ($source, $targets, $params) {
