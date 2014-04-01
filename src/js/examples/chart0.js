@@ -1,5 +1,5 @@
 rf.StandaloneDashboard(function(db){
-	var chart = new ChartComponent();
+	var chart = new ChartComponent('someid');
 	chart.setDimensions (4, 4);
 	chart.setCaption("Expenses incurred on Food Consumption by Year");	
 	chart.setLabels (["2009", "2010", "2011"])
