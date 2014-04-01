@@ -86,15 +86,15 @@ StandaloneDashboard(function (db) {
     c9.setDimensions(6,6);
     c9.setCaption('Distribution of inventory by units');
     c9.setLabels(categories);
-    db.addComponent(c9);
     c9.lock();
+    db.addComponent(c9);
 
     var c10 = new ChartComponent();
     c10.setDimensions(6,6);
     c10.setCaption('Distribution of inventory by value');
     c10.setLabels(categories);
-    db.addComponent(c10);
     c10.lock();
+    db.addComponent(c10);
 
     var c11 = new TableComponent();
     c11.setDimensions(6, 6);
@@ -123,7 +123,7 @@ StandaloneDashboard(function (db) {
     db.addComponent(c12);
 
     $.ajax({
-        url: '/fixtures/products.json',
+        url: '/static/fixtures/products.json',
         type: 'GET',
         success: function(products) {
             if (_.isString(products)) {
@@ -192,7 +192,7 @@ StandaloneDashboard(function (db) {
             
             c11.unlock();
 
-            c12.onApplyClicked(function() {
+            c12.onApplyClick(function() {
                 var values = c12.getAllInputValues();
                 var rows = products;
                 

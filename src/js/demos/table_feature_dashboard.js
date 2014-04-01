@@ -26,7 +26,7 @@ StandaloneDashboard(function (db) {
     db.addComponent(c1);
 
     $.ajax({
-        url: '/fixtures/products.json',
+        url: '/static/fixtures/products.json',
         type: 'GET',
         success: function(products) {
             if (_.isString(products)) {
