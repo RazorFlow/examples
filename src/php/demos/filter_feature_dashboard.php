@@ -13,6 +13,7 @@ class SampleDashboard extends StandaloneDashboard {
     
     $categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     $c1 = new TableComponent("table1");
+    $c1->setCaption("List of items in stock");
     $c1->setDimensions (6, 6);
     $c1->addColumn('ProductID', 'Product ID');
     $c1->addColumn('ProductName', 'Product Name');
@@ -29,6 +30,7 @@ class SampleDashboard extends StandaloneDashboard {
     $this->addComponent($c1);
 
     $c2 = new FilterComponent('filter1');
+    $c2->setCaption("Filter items in stock");
     $c2->setDimensions (6, 6);
     $c2->addTextFilter('contains', 'Product Name Contains');
     $c2->addNumericRangeFilter ('stock', 'Units In Stock');
