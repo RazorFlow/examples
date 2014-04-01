@@ -1,5 +1,5 @@
 rf.StandaloneDashboard(function(db){
-	var table = new TableComponent ();
+	var table = new TableComponent ('test');
 	table.setCaption ("Regional Sales");
 	table.setDimensions(4, 4);
 	table.addColumn ('zone', "Zone");

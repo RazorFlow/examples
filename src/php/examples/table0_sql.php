@@ -40,7 +40,7 @@ class SampleDashboard extends StandaloneDashboard {
 
   public function buildDashboard () {
     $table = new TableComponent('table1');
-    $table->setCaption ("Employees");
+    $table->setCaption ("List of Employees");
     $table->setDimensions (6, 6);
     $employees = $this->getEmployees();
     $table->addColumn ('FirstName', "First Name");

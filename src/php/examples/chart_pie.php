@@ -3,7 +3,7 @@
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $chart = new ChartComponent("pie_chart");
-    $chart->setCaption("A pie chart");
+    $chart->setCaption("Monthly Unit Distribution");
     $chart->setDimensions (4, 4);
     $chart->setLabels (["Jan", "Feb", "Mar"]);
     $chart->setPieValues ([10, 14, 13]);
