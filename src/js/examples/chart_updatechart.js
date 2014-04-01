@@ -15,6 +15,10 @@ rf.StandaloneDashboard(function(db){
 	db.addComponent (chart2);
 
 	chart.onItemClick (function (params) {
-		chart2.updateSeries ("series_1", [3, 5, 2]);
+		chart2.lock ();
+		chart2.clearChart ();
+		chart2.setLabels (["D", "E"]);
+		chart2.addSeries ("series_1","New Series 1", [3, 5]);
+		chart2.unlock();
 	});
 });
