@@ -16,7 +16,7 @@ class SampleDashboard extends StandaloneDashboard {
       $this->getEmployees();
     }
     else{
-       $query = $this->pdo->query("SELECT Employee.EmployeeId, Employee.FirstName, Employee.LastName, Employee.City, Employee.State, Employee.Country FROM Employee WHERE Employee.City='$cityName'");
+       $query = $this->pdo->query("SELECT Employee.EmployeeId, Employee.FirstName, Employee.LastName, Employee.City, Employee.State, Employee.Country FROM Employee WHERE Employee.City LIKE '%$cityName%'");
     return  $query->fetchAll(PDO::FETCH_ASSOC); 
     }
   }
@@ -63,7 +63,7 @@ class SampleDashboard extends StandaloneDashboard {
   }
 
   public function handleEmployeesSubmit ($source, $target, $params) {
-    $cityName = $params->contains;
+    $cityName = $params['contains'];
     $table = $this->getComponentByID("table1");
     $employees = $this->getByCity ($cityName);
     $table->clearRows();
