@@ -11,13 +11,14 @@ class SampleDashboard extends StandaloneDashboard {
   	return  $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  private function getByCity($cityName){
+  private function getByCity($cityName=null){
     if($cityName == ''){
       $this->getEmployees();
     }
     else{
-       $query = $this->pdo->query("SELECT Employee.EmployeeId, Employee.FirstName, Employee.LastName, Employee.City, Employee.State, Employee.Country FROM Employee WHERE Employee.City LIKE '%$cityName%'");
-    return  $query->fetchAll(PDO::FETCH_ASSOC); 
+       $query = $this->pdo->prepare("SELECT Employee.EmployeeId, Employee.FirstName, Employee.LastName, Employee.City, Employee.State, Employee.Country FROM Employee WHERE Employee.City LIKE :cityName");
+       $query->execute(array("cityName" => "%$cityName%"));
+       return  $query->fetchAll(PDO::FETCH_ASSOC); 
     }
   }
 
