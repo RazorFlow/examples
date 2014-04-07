@@ -48,6 +48,6 @@ StandaloneDashboard(function (tdb) {
 	tdb.addDashboardTab(db1);
 	tdb.addDashboardTab(db2);
 	tdb.addDashboardTab(db3);
-	tdb.addDashboardTab(db4);
+	tdb.addDashboardTab(db4, {'active':true});
 
 }, {tabbed: true});
