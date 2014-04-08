@@ -11,6 +11,8 @@ class MyDashboard extends EmbeddedDashboard {
     $chart->setPieValues ([10, 14, 13]);
 
     $this->addComponent ($chart);
+    $this->setWidth(400);
+    $this->setHeight(300);
   }
 }
 $db = new MyDashboard();

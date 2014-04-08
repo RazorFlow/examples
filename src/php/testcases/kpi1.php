@@ -36,7 +36,7 @@ class SampleDashboard extends StandaloneDashboard {
         // $chart->addSeries("seriesB", "Series B", [3, 1, 9, 2, 3], null);
         // $this->addComponent ($chart);
 
-        $kpi->bindToEvent ("kpiClick", array($kpi2, $table), "handleKPIClick");
+        $kpi->bindToEvent ("kpiClick", array($kpi2, $table), "handleKPIClick", $this);
     }
 
     public function handleKPIClick ($source, $targets, $params) {

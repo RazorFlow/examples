@@ -47,7 +47,7 @@ class SampleDashboard extends StandaloneDashboard {
     $table->addColumn ('FirstName', "First Name");
     $table->addColumn ('LastName', "Last Name");
     $table->addColumn ('City', "City");
-    $table->addColumn ('State', "State");
+    $table->addColumn ('State', "State", array('textItalicFlag' => true));
     $table->addColumn ('Country', "Country");
     $table->addMultipleRows($this->populateData($employees));
 
@@ -58,7 +58,7 @@ class SampleDashboard extends StandaloneDashboard {
     $filter->setDimensions (4, 4);
     $filter->addTextFilter ("contains", "City Contains");
 
-    $filter->onApplyClick (array($table), "handleEmployeesSubmit");
+    $filter->onApplyClick (array($table), "handleEmployeesSubmit", $this);
 
     $this->addComponent($filter);
   }

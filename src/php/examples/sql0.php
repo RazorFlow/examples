@@ -40,7 +40,7 @@ class SampleDashboard extends StandaloneDashboard {
   	$topAlbumsChart->addSeries ('top_albums', "Top Albums", ArrayUtils::pluck($top_albums, "total_sales"));
   	$this->addComponent($topAlbumsChart);
 
-    $topArtistsChart->bindToEvent ("itemClick", array($topAlbumsChart), "handleArtistChartClick");
+    $topArtistsChart->bindToEvent ("itemClick", array($topAlbumsChart), "handleArtistChartClick", $this);
   }
 
   public function handleArtistChartClick ($source, $target, $params) {
