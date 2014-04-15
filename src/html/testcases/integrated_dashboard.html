@@ -1,0 +1,67 @@
+
+<div class="container">
+    <div class="header">
+        <h2> Integrated Dashboard </h2>
+    </div>
+    <div class="dashboard-containers">
+        <div class="dashboard">
+            <div class="title">
+             Chart
+            </div>
+            <div id="chart">
+
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="title">
+             KPI
+            </div>
+            <div id="kpi">
+
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="title">
+             Table
+            </div>
+            <div id="table">
+
+            </div>
+        </div>
+            
+    </div>
+</div>
+<script type="text/javascript">
+    function rfReady() {
+    	var kpi = new KPIComponent();
+		kpi.setDimensions(3,2);
+		kpi.setCaption("Hello");
+		kpi.setValue("20");
+		kpi.renderTo("kpi");
+
+		var chart = new ChartComponent('someid');
+		chart.setDimensions (4, 4);
+		chart.setLabels (["2009", "2010", "2011"])
+		chart.addSeries ("beverages", "Beverages", [1355, 1916, 1150]);
+		chart.addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321]);
+		chart.renderTo("chart");
+
+		var table = new TableComponent ('test');
+		table.setCaption ("Regional Sales");
+		table.setDimensions(4, 4);
+		table.addColumn ('zone', "Zone");
+		table.addColumn ('name', "Store Name");
+		table.addColumn ('sale', "Sales amount");
+		var data = [
+			{zone: "North", name: "Northern Stores", sale: 4000},
+			{zone: "South", name: "Southern Stores", sale: 4500},
+		];
+		table.addMultipleRows (data);
+		table.renderTo('table');
+    }
+        
+</script>
+
+    
