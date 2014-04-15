@@ -44,10 +44,107 @@ StandaloneDashboard(function (tdb) {
 	table.addMultipleRows (data);
 	db4.addComponent(table);
 
+	var db5 = new Dashboard('db5');
+	db5.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db5.addComponent(table);
+
+	var db6 = new Dashboard('db6');
+	db6.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db6.addComponent(table);
+
+	var db7 = new Dashboard('db7');
+	db7.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db7.addComponent(table);
+
+	var db8 = new Dashboard('db8');
+	db8.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db8.addComponent(table);
+
+	var db9 = new Dashboard('db9');
+	db9.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db9.addComponent(table);
+
+	var db10 = new Dashboard('db10');
+	db10.setDashboardTitle('Dashboard 4');
+	var table = new TableComponent ('test');
+	table.setCaption ("Regional Sales");
+	table.setDimensions(4, 4);
+	table.addColumn ('zone', "Zone");
+	table.addColumn ('name', "Store Name");
+	table.addColumn ('sale', "Sales amount");
+	var data = [
+		{zone: "North", name: "Northern Stores", sale: 4000},
+		{zone: "South", name: "Southern Stores", sale: 4500},
+	];
+	table.addMultipleRows (data);
+	db10.addComponent(table);
+
 
 	tdb.addDashboardTab(db1);
 	tdb.addDashboardTab(db2);
 	tdb.addDashboardTab(db3);
-	tdb.addDashboardTab(db4, {'active':true, 'title':'my'});
+	tdb.addDashboardTab(db4);
+	tdb.addDashboardTab(db5);
+
+	tdb.addDashboardTab(db6);
+	tdb.addDashboardTab(db7);
+	tdb.addDashboardTab(db8);
+	tdb.addDashboardTab(db9);
+	tdb.addDashboardTab(db10);
 
 }, {tabbed: true});
