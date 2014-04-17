@@ -72,16 +72,22 @@ class SampleDashboard3 extends Dashboard {
   }
 }
 
-$db1 = new SampleDashboard();
-$db2 = new SampleDashboard2();
-$db3 = new SampleDashboard3();
+class SampleTabbedDashboard extends TabbedDashboard {
+
+  public function buildDashboard() {
+    $db1 = new SampleDashboard();
+    $db2 = new SampleDashboard2();
+    $db3 = new SampleDashboard3();
+
+    $this->settabbedDashboardTitle('Tabbed Dashboard');
+    $this->addDashboardTab ($db1);
+    $this->addDashboardTab ($db2);
+    $this->addDashboardTab ($db3);
+    $this->setActive($db1);
+  }
+
+}
+
   
-$tab = new TabbedDashboard();
-$tab->settabbedDashboardTitle('Tabbed Dashboard');
-$tab->addDashboardTab ($db1);
-$tab->addDashboardTab ($db2);
-$tab->addDashboardTab ($db3);
-$tab->setActive($db1);
-
-
-$tab->renderTabbed();
+$tab = new SampleTabbedDashboard();
+$tab->renderStandalone();
