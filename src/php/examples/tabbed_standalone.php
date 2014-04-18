@@ -1,5 +1,4 @@
 <?php
-
 class SampleDashboard extends Dashboard {
   public function buildDashboard(){
 
@@ -18,9 +17,9 @@ class SampleDashboard extends Dashboard {
 
     $this->setDashboardTitle("Dashboard 1");
     $this->addComponent($chart);
-    $this->setActive();
     $this->addComponent($kpi);
-  }
+  
+}
 
   public function handleItemClick($source, $targets, $params) {
     // sleep(3);
@@ -28,6 +27,7 @@ class SampleDashboard extends Dashboard {
     $kpi->setValue($params['value']);
     $kpi->setCaption("Year: ".$params['label']);
   }
+
 }
 
 class SampleDashboard2 extends Dashboard {
@@ -41,7 +41,9 @@ class SampleDashboard2 extends Dashboard {
 
     $this->setDashboardTitle("Dashboard 2");
     $this->addComponent($chart);
-  }
+  
+}
+
 }
 
 class SampleDashboard3 extends Dashboard {
@@ -65,7 +67,8 @@ class SampleDashboard3 extends Dashboard {
     $this->addComponent ($chart2);
 
     $chart->onItemClick (array($chart2), "handleItemClick", $this);
-  }
+  
+}
 
   public function handleItemClick ($source, $targets, $params) {
     $chart2 = $this->getComponentByID("chart2");
@@ -73,20 +76,21 @@ class SampleDashboard3 extends Dashboard {
   }
 }
 
-class Tabbed extends TabbedDashboard {
-  
+class SampleTabbedDashboard extends TabbedDashboard {
+
   public function buildDashboard() {
     $db1 = new SampleDashboard();
     $db2 = new SampleDashboard2();
     $db3 = new SampleDashboard3();
-      
+
     $this->settabbedDashboardTitle('Tabbed Dashboard');
     $this->addDashboardTab ($db1);
     $this->addDashboardTab ($db2);
     $this->addDashboardTab ($db3);
+    $this->setActive($db1);
   }
+
 }
-
-
-$tab = new Tabbed();
+  
+$tab = new SampleTabbedDashboard();
 $tab->renderStandalone();
