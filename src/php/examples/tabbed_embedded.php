@@ -1,10 +1,10 @@
 <?php
 
-require 'embedded_db.php';
+require 'dashboards.php';
 
 global $razorflow_assets;
 $db = new MyDashboard();
-$db->setActionPath('http://localhost:8085/dev/php/examples/embed1_action');
+$db->setActionPath('http://localhost:8085/dev/php/examples/tabbed_embedded_action');
 
 ?>
 <!doctype html>
