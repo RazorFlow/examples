@@ -25,10 +25,23 @@ rf.StandaloneDashboard(function(db){
 		caption: "again",
 		value: "22"
 	});
+
 	db.addComponent (chart);
+
+	setTimeout(function () {
+		chart.updateComponentKPI("first", {
+			value: "10"
+		});
+	}, 2000);
+
+	setTimeout(function () {
+		chart.removeComponentKPI("first");
+	}, 4000);
+
+
 	var table = new TableComponent ('test');
 	table.setCaption ("Regional Sales");
-	table.setDimensions(4, 4);
+	table.setDimensions(2, 4);
 	table.addColumn ('zone', "Zone");
 	table.addColumn ('name', "Store Name");
 	table.addColumn ('sale', "Sales amount");
