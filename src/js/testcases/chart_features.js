@@ -3,7 +3,7 @@ StandaloneDashboard(function(db) {
     var c1 = new ChartComponent();
     c1.setCaption ("Column Chart");
     c1.setDimensions(4,4);
-    c1.setLabels('January', 'February', 'March', 'April', 'May')
+    c1.setLabels(['January', 'February', 'March', 'April', 'May']);
     c1.addSeries("seriesA", 4234, [1, 3, 5, 1, 9])
     c1.addSeries("seriesB", "Series B", [3, 1, 9, 2, 3])
     db.addComponent (c1);
