@@ -10,7 +10,8 @@ class SampleDashboard extends StandaloneDashboard {
         $table->addColumn('name', "Store Name");
         $table->addColumn('sale', "Sales Amount", array(
           "dataType" => "number",
-          "numberPrefix" => "$ "
+          "numberPrefix" => "$ ",
+          "textAlign" => "center"
         ));
         
         $data = array(

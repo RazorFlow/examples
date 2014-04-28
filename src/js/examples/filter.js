@@ -8,7 +8,9 @@ rf.StandaloneDashboard(function (db) {
     c1.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
     c1.addDateFilter('delivery_date', 'Delivery Date', {});
     c1.addDateRangeFilter('grace_period', 'Grace Period', {});
-    c1.addNumericRangeFilter('units', 'Units in Stock');
+    c1.addNumericRangeFilter('units', 'Units in Stock', [0, 50], {
+      largeStep: 20
+    });
 
     db.addComponent(c1);
 });

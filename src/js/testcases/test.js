@@ -23,15 +23,18 @@ StandaloneDashboard(function (db) {
     c3.setCaption ("table component");
     c3.addColumn ("a", "Column A", {
       dataType: "number",
-      numberPrefix: "$"
+      numberPrefix: "$",
     });
     c3.addColumn ("b", "Column B", {
       dataType: "number",
       numberSuffix: "%"
     });
+    c3.addSparkColumn ("c", "Column C", {
+      textAlign: "center"
+    });
 
-    for(var i = 0; i < 85; i++) {
-        c3.addRow ({a: 2 * i, b: 2 * i + 1});
+    for(var i = 0; i < 8; i++) {
+        c3.addRow ({a: 2 * i, b: 2 * i + 1, c: [5, 1, 3, 2, 4, 6, 3, 1]});
     }
     db.addComponent(c3);
 
