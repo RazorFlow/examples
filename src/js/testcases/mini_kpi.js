@@ -15,7 +15,7 @@ rf.StandaloneDashboard(function(db){
     caption: "Number Formatter",
     value: "4200000",
     numberPrefix: "$",
-    humanize: true
+    numberHumanize: true
   });
 
   chart.addComponentKPI("third", {
