@@ -20,7 +20,9 @@ StandaloneDashboard(function (db) {
         numberForceDecimals: true,
         numberDecimalPoints: 2
     });
-    c1.addColumn('UnitsInStock', 'Stock');
+    c1.addColumn('UnitsInStock', 'Stock', {
+        dataType: "number"
+    });
     c1.addColumn('Discontinued', 'Discontinued?');
     c1.lock();
     db.addComponent(c1);
