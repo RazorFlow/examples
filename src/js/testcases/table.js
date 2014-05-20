@@ -13,11 +13,13 @@ StandaloneDashboard(function (db) {
         textAlign: 'center'
     });
     c1.addColumn('sales', 'Sales', {
+        dataType: 'number',
         numberPrefix: '$',
-        textAlign: 'right'
+        textAlign: 'right',
+        subCaption: true
     });
     c1.addColumn('inventory', 'Inventory', {
-
+        "dataType": "number"
     });
     c1.addColumn('date', 'Date', {
 

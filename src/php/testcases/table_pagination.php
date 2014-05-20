@@ -4,14 +4,14 @@ class SampleDashboard extends StandaloneDashboard {
     public function buildDashboard () {
         $table = new TableComponent('table1');
         $table->setCaption("Table 1");
-        $table->setDimensions (6,3);
+        $table->setDimensions (6, 3);
         $table->setRowsPerPage (8);
         $table->addColumn('colA', "Column A");
         $table->addColumn('colB', "Column B");
 
         $table->setRowDataSource('paginate', $this);
         $table->setNumberOfRows(40);
-        $table->setRowsPerPage(5);
+        $table->setRowsPerPage(7);
 
         $this->addComponent ($table);
     }
@@ -24,12 +24,12 @@ class SampleDashboard extends StandaloneDashboard {
       array('colA' => 222 + $take, 'colB' => 33),
       array('colA' => 333 + $take, 'colB' => 44),
       array('colA' => 444 + $take, 'colB' => 55),
-      array('colA' => 555 + $take, 'colB' => 66)
+      array('colA' => 777 + $take, 'colB' => 88),
+      array('colA' => 777 + $take, 'colB' => 88),
+      array('colA' => 777 + $take, 'colB' => 88)
     );
 
-    return array(
-      "rows" => $rows
-    );
+    return $rows;
   }
 }
 
