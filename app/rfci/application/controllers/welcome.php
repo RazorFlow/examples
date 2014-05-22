@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require APPPATH . 'rfDashboards/sample.php';
+
 class Welcome extends CI_Controller {
 
 	/**
@@ -19,7 +21,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$db = new SampleDashboard();
+		$db->renderStandalone();
 	}
 }
 
