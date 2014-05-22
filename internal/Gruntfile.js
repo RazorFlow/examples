@@ -32,6 +32,12 @@ module.exports = function (grunt) {
                 [
                     {cwd: '../../phprf/build/package/', src: ["**/*"], dest: '../lib/phprf/'}
                 ]
+            },
+            codeigniter: {
+                files: 
+                [
+                    {cwd: '../../phprf/build/package/', src: ["**/*"], dest: '../app/rfci/application/libraries/razorflow_php/'}
+                ]
             }
 
     	},
