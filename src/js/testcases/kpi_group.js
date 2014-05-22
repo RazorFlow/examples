@@ -39,9 +39,9 @@ StandaloneDashboard(function(db) {
     setTimeout(function() {
         kpi.updateKPI('first', {value: 3000});
         kpi.setKPICaptionColor('first', '#f00');
-        setTimeout(function() {
-            kpi.deleteKPI('fifth');
-        }, 1000);
+        // setTimeout(function() {
+        //     kpi.deleteKPI('fifth');
+        // }, 1000);
     }, 3000);
     
 });
