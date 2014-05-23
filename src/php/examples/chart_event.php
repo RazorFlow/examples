@@ -2,13 +2,6 @@
 
 class SampleDashboard extends StandaloneDashboard {
 
-  private $labels;
-
-  public function __construct() {
-    //Initialize variables
-    $this->labels = array("2009", "2010", "2011");
-  }
-
   public function buildDashboard(){
     $chart = new ChartComponent("chart");
     $chart->setCaption("Expenses incurred for Food Consumption by Year");
@@ -28,7 +21,7 @@ class SampleDashboard extends StandaloneDashboard {
 
   public function handleClick ($source, $targets, $params) {
   	$kpi = $this->getComponentById ('kpi');
-  	$kpi->setCaption ("Year: ".$this->labels[$params['labelIndex']]);
+  	$kpi->setCaption ("Year: ".$params['label']);
   	$kpi->setValue ($params['value'], array('numberPrefix' => '$'));
   }
 }

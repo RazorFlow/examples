@@ -2,12 +2,6 @@
 
 class MyDashboard extends EmbeddedDashboard {
 
-  public $labels;
-
-  public function __construct() {
-    $this->labels = array("2009", "2010", "2011");
-  }
-
   public function buildDashboard(){
 
     $kpi = new KPIComponent("kpi1");
@@ -34,7 +28,7 @@ class MyDashboard extends EmbeddedDashboard {
     // sleep(3);
     $kpi = $this->getComponentById("kpi1");
     $kpi->setValue($params['value']);
-    $kpi->setCaption("Year: ".$this->labels[$params['labelIndex']]);
+    $kpi->setCaption("Year: ".$params['label']);
 
   }
 }
