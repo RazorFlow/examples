@@ -25,7 +25,9 @@ StandaloneDashboard(function(db) {
     };
 
     multiKpi(function(kpi) {
-        kpi.setValue(42);
+        kpi.setValue(42, {
+            kpiValueTextColor: "red"
+        });
         kpi.setCaption("Small Label");
     });
     multiKpi(function(kpi) {
