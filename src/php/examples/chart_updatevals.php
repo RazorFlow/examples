@@ -22,9 +22,8 @@ class SampleDashboard extends StandaloneDashboard {
   }
 
   public function handleItemClick ($source, $targets, $params) {
-    print_r($params);
-    // $chart2 = $this->getComponentByID("chart2");
-    // $chart2->updateSeries("series_1", [3, 5, 2]);
+    $chart2 = $this->getComponentByID("chart2");
+    $chart2->updateSeries("series_1", [3, 5, 2]);
   }
 
 }
