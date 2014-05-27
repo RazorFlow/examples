@@ -5,7 +5,10 @@ class SampleDashboard extends StandaloneDashboard {
   	$kpi = new KPIComponent ('kpi');
   	$kpi->setCaption ('Sales');
   	$kpi->setDimensions (3, 3);
-  	$kpi->setValue (1913, array('numberPrefix' => '$'));
+  	$kpi->setValue (1913, array(
+  		'numberPrefix' => '$',
+  		'valueTextColor' => 'red'
+  	));
 
     $this->addComponent ($kpi);
   }

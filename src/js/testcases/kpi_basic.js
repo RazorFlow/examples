@@ -26,7 +26,7 @@ StandaloneDashboard(function(db) {
 
     multiKpi(function(kpi) {
         kpi.setValue(42, {
-            kpiValueTextColor: "red"
+            valueTextColor: "red"
         });
         kpi.setCaption("Small Label");
     });
