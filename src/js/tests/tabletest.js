@@ -1,7 +1,13 @@
 describe ("Table Tests", function () {
 	var db;
 	beforeEach(function () {
+		if(db) {
+			db.pro.dispose();
+		}
 		$("#dbTarget").empty().removeClass("");
+		$("#dbTarget").css({
+			width: 800
+		})
 	});
 
 	var createTable = function (col1Obj, col2Obj) {
@@ -25,13 +31,21 @@ describe ("Table Tests", function () {
 		db.addComponent(table);
 		db.embedTo ("dbTarget");
 
-		setTimeout(function () {
-			var core = table.pro.renderer.$core;
-			expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("4");
-			done();
-		}, 200);
+		// setTimeout(function () {
+		// 	var core = table.pro.renderer.$core;
+		// 	expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("4");
+		// 	done();
+		// }, 200);
 
-	});
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core)
+		  .assertText(function (context) {
+		  	return context.find("tr:eq(3)").find("td > p:eq(0)");
+		  }, "4")
+		  .finish();
+	});	
 
 	it("Should format values", function (done) {
 		db = new Dashboard ();
@@ -39,11 +53,20 @@ describe ("Table Tests", function () {
 		db.addComponent(table);
 		db.embedTo ("dbTarget");
 
-		setTimeout(function () {
-			var core = table.pro.renderer.$core;
-			expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("$4");
-			done();
-		}, 200);
+		// setTimeout(function () {
+		// 	var core = table.pro.renderer.$core;
+		// 	expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("$4");
+		// 	done();
+		// }, 200);
+
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core)
+		  .assertText(function (context) {
+		  	return context.find("tr:eq(3)").find("td > p:eq(0)");
+		  }, "$4")
+		  .finish();
 	});
 
 	it("Should paginate", function (done) {
@@ -52,13 +75,24 @@ describe ("Table Tests", function () {
 		db.addComponent(table);
 		db.embedTo ("dbTarget");
 
-		setTimeout(function () {
-			var core = table.pro.renderer.$core;
-			core.find(".rfNextButton").click ();
-			setTimeout(function () {
-				expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("$24");
-				done();
-			}, 200);
-		}, 200);
+		// setTimeout(function () {
+		// 	var core = table.pro.renderer.$core;
+		// 	core.find(".rfNextButton").click ();
+		// 	setTimeout(function () {
+		// 		expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("$24");
+		// 		done();
+		// 	}, 200);
+		// }, 200);
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core)
+		  .click(".rfNextButton")
+		  .wait(200)
+		  .assertText(function (context) {
+		  	return context.find("tr:eq(3)").find("td > p:eq(0)");
+		  }, "$24")
+		  .finish();
+
 	});
 })

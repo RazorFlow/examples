@@ -2,6 +2,9 @@ describe ("KPI Tests", function () {
 	var db;
 	beforeEach(function () {
 		$("#dbTarget").empty();
+		$("#dbTarget").css({
+			width: 800
+		})
 	});
 
 	it("Should render a basic KPI", function (done) {
@@ -15,10 +18,16 @@ describe ("KPI Tests", function () {
 
 		db.embedTo("dbTarget");
 
-		// Give 1000 ms for dashboard to execute
-		setTimeout (function () {
-			expect($(".rfKPIValue").text()).toEqual("42");
-			done();
-		}, 1000);
+		// // Give 1000 ms for dashboard to execute
+		// setTimeout (function () {
+		// 	expect($(".rfKPIValue").text()).toEqual("42");
+		// 	done();
+		// }, 1000);
+
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(400)
+		  .assertText(".rfKPIValue", "42")
+		  .finish();
 	});
 })
