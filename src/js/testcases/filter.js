@@ -4,8 +4,8 @@ StandaloneDashboard(function (db) {
     c1.setCaption('Test Filter Component');
 
     c1.addTextFilter('name', 'Name');
-    c1.addSelectFilter('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {});
-    c1.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
+    c1.addSelectFilter('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {defaultSelectedIndex: 2});
+    c1.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], { defaultSelectedOptions: [2, 4] });
     c1.addDateFilter('delivery_date', 'Delivery Date', {});
     c1.addDateRangeFilter('grace_period', 'Grace Period', {});
     c1.addCheckboxFilter('international', 'International', {});
