@@ -3,7 +3,9 @@ StandaloneDashboard(function (db) {
     c1.setDimensions(6, 6);
     c1.setCaption('Test Filter Component');
 
-    c1.addTextFilter('name', 'Name');
+    c1.addTextFilter('name', 'Name', {
+        defaultText: "hello"
+    });
     c1.addSelectFilter('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {defaultSelectedIndex: 2});
     c1.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], { defaultSelectedOptions: [2, 4] });
     c1.addDateFilter('delivery_date', 'Delivery Date', {});
