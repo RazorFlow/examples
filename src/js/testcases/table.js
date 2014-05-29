@@ -10,7 +10,7 @@ StandaloneDashboard(function (db) {
 
     });
     c1.addColumn('unitsSold', 'Units Sold which is sold and sold', {
-        textAlign: 'center'
+        textAlign: 'right'
     });
     c1.addColumn('sales', 'Sales', {
         dataType: 'number',
