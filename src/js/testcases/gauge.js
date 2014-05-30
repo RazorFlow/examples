@@ -2,7 +2,7 @@ StandaloneDashboard(function (db) {
 	var gauge1 = new GaugeComponent();
     gauge1.setDimensions(3,2);
     gauge1.setCaption('min max disappeared');
-    gauge1.setValue(144);
+    gauge1.setValue(144, {numberPrefix: '$'});
     gauge1.setLimits(0, 200);
     db.addComponent(gauge1);
 
