@@ -78,6 +78,44 @@ describe ("Component KPI Mobile Tests", function () {
 		  .finish();
 	});	
 
+	it("Should update the value of kpi", function (done) {
+		db = new Dashboard ();
+		var table = createTable(6, 6);
+		table.addComponentKPI("foo", {
+			caption: "Hello",
+			value: 42,
+			numberPrefix: "$"
+		});
+		table.addComponentKPI("bar", {
+			caption: "World",
+			value: 45000,
+			numberHumanize: true
+		});
+
+		db.addComponent(table);
+		db.embedTo("dbTarget");
+
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core.parent())
+		  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
+		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPICaption", "Hello", {trim: true}) // Trim the text
+		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPIValue", "$42", {trim: true})
+		  .assertText(".rfMiniKPIContainer:eq(1) .rfKPIValue", "45K", {trim:true})
+		  .doSync(function () {
+		  	table.updateComponentKPI("foo", {
+		  		value: 45
+		  	});
+		  })
+		  .setContext(function () {
+		  	var x = table.pro.renderer.$core.parent().find(".rfKPIGroupContainer");
+		  	return x;
+		  }) // Reset the context
+		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPIValue", "$45", {trim: true})
+		  .finish();
+	});	
+
 
 	it("Should support larger number of KPIs", function (done) {
 		db = new Dashboard ();
