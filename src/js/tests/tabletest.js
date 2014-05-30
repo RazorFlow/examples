@@ -93,6 +93,30 @@ describe ("Table Tests", function () {
 		  	return context.find("tr:eq(3)").find("td > p:eq(0)");
 		  }, "$24")
 		  .finish();
+	});
 
+	it("Should paginate", function (done) {
+		db = new Dashboard ();
+		var table = createTable({columnWidth: 150, numberPrefix:"$"}, {});
+		db.addComponent(table);
+		db.embedTo ("dbTarget");
+
+		// setTimeout(function () {
+		// 	var core = table.pro.renderer.$core;
+		// 	core.find(".rfNextButton").click ();
+		// 	setTimeout(function () {
+		// 		expect($($(core.find("tr")[3]).find("td > p")[0]).text()).toBe("$24");
+		// 		done();
+		// 	}, 200);
+		// }, 200);
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core)
+		  .assertCSS(function (context) {
+		  	var x = context.find("tr:eq(3)").find("td > p:eq(0)");
+		  	return x;
+		  }, "width", '191px') // TODO(narendra): Make this pass with 150
+		  .finish();
 	});
 })
