@@ -9,6 +9,7 @@ rf.StandaloneDashboard(function(db){
   chart.addComponentKPI("first", {
     caption: "Looooong text with blah blah blah",
     value: "200",
+    numberPrefix: '$'
   });
 
   chart.addComponentKPI("second", {
