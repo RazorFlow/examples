@@ -76,5 +76,31 @@ describe ("Component KPI Tests - Desktop", function () {
 		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPIValue", "$42", {trim: true})
 		  .assertText(".rfMiniKPIContainer:eq(1) .rfKPIValue", "45K", {trim:true})
 		  .finish();
-	});	
+	});
+
+	it("should update the component kpi", function (done) {
+		db = new Dashboard ();
+		var table = createTable(6, 6);
+		table.addComponentKPI("foo", {
+			caption: "Hello",
+			value: 42,
+			numberPrefix: "$"
+		});
+
+		db.addComponent(table);
+		db.embedTo("dbTarget");
+
+		table.updateComponentKPI("foo", {
+	      value: "10"
+	    });
+
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core.parent())
+		  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
+		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPICaption", "Hello", {trim: true}) // Trim the text
+		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPIValue", "$10", {trim: true})
+		  .finish();
+	});
 })
