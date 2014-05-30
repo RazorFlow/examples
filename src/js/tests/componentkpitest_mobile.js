@@ -13,7 +13,7 @@ describe ("Component KPI Mobile Tests", function () {
 	var createTable = function (width, height) {
 		var table1 = new TableComponent ();
 		table1.setCaption ("Table Component");
-		table1.setDimensions (6, 6);
+		table1.setDimensions (width, height);
 		table1.addColumn("foo", "Foo", {});
 		table1.addColumn("bar", "Bar", {});
 		table1.addColumn("str", "Stringlike");
@@ -119,6 +119,42 @@ describe ("Component KPI Mobile Tests", function () {
 		  .assertText(".rfMiniKPIContainer:eq(2) .rfKPIValue", "3", {trim: true})
 		  .assertText(".rfMiniKPIContainer:eq(3) .rfKPICaption", "KPI 4", {trim: true}) // Trim the text
 		  .assertText(".rfMiniKPIContainer:eq(3) .rfKPIValue", "4", {trim: true})
+		  .assertText(".rfMiniKPIContainer:eq(3) .rfKPIValue", "4", {trim: true})
+		  .finish();
+	});	
+	it("Should automatically grow in height with more kpis", function (done) {
+		db = new Dashboard ();
+		var table = createTable(12, 12);
+		table.addComponentKPI("foo", {
+			caption: "KPI 1",
+			value: 1,
+			numberPrefix: "$"
+		});
+		table.addComponentKPI("bar", {
+			caption: "KPI 2",
+			value: 2,
+			numberHumanize: true
+		});
+		table.addComponentKPI("bar2", {
+			caption: "KPI 3",
+			value: 3,
+			numberHumanize: true
+		});
+		table.addComponentKPI("bar45", {
+			caption: "KPI 4",
+			value: 4,
+			numberHumanize: true
+		});
+
+		db.addComponent(table);
+		db.embedTo("dbTarget");
+
+		var th = new TestHelper ();
+		th.start(done)
+		  .wait(200)
+		  .setContext(table.pro.renderer.$core.parent())
+		  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
+		  .assertCSS(".", "height", function (val) { return 160 < parseInt(val) < 170})
 		  .finish();
 	});	
 })
