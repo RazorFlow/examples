@@ -4,7 +4,7 @@ describe ("Table Tests", function () {
 		if(db) {
 			db.pro.dispose();
 		}
-		$("#dbTarget").empty().removeClass("");
+		$("#dbTarget").empty().removeClass();
 		$("#dbTarget").css({
 			width: 800
 		})
@@ -116,7 +116,7 @@ describe ("Table Tests", function () {
 		  .assertCSS(function (context) {
 		  	var x = context.find("tr:eq(3)").find("td > p:eq(0)");
 		  	return x;
-		  }, "width", '150px')
+		  }, "width", function (val) {return 147 < parseInt(val) < 153; })
 		  .finish();
 	});
 })

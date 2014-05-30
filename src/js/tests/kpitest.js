@@ -1,6 +1,9 @@
 describe ("KPI Tests", function () {
 	var db;
 	beforeEach(function () {
+		if(db) {
+			db.pro.dispose();
+		}
 		$("#dbTarget").empty();
 		$("#dbTarget").css({
 			width: 800
