@@ -95,7 +95,7 @@ describe ("Table Tests", function () {
 		  .finish();
 	});
 
-	it("Should paginate", function (done) {
+	it("Should apply columnWidth", function (done) {
 		db = new Dashboard ();
 		var table = createTable({columnWidth: 150, numberPrefix:"$"}, {});
 		db.addComponent(table);
@@ -116,7 +116,7 @@ describe ("Table Tests", function () {
 		  .assertCSS(function (context) {
 		  	var x = context.find("tr:eq(3)").find("td > p:eq(0)");
 		  	return x;
-		  }, "width", '191px') // TODO(narendra): Make this pass with 150
+		  }, "width", '150px')
 		  .finish();
 	});
 })
