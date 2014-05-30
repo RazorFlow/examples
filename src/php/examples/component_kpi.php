@@ -10,14 +10,14 @@ class SampleDashboard extends StandaloneDashboard {
     $chart->addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321]);
 
     $chart->addComponentKPI("first", array(
-      "caption" => "Number Formatter",
+      "caption" => "Quantity",
+      "value" => 20
+    ));
+    $chart->addComponentKPI("second", array(
+      "caption" => "Revenue",
       "value" => 4200000,
       "numberPrefix" => "$",
       "numberHumanize" => true
-    ));
-    $chart->addComponentKPI("second", array(
-      "caption" => "Sample Text",
-      "value" => 200
     ));
 
     $this->addComponent ($chart);
