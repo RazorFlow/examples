@@ -30,10 +30,10 @@ rf.StandaloneDashboard(function(db){
 
   db.addComponent (chart);
 
-  // setTimeout(function () {
-  //   chart.updateComponentKPI("first", {
-  //     value: "10"
-  //   });
-  // }, 2000);
+  setTimeout(function () {
+    chart.updateComponentKPI("first", {
+      value: "10"
+    });
+  }, 2000);
 
 });
