@@ -1,19 +1,20 @@
 describe ("Component KPI Tests - Desktop", function () {
 	var db;
 	beforeEach(function () {
-		if(db) {
-			db.pro.dispose();
-		}
 		$("#dbTarget").empty().removeClass("");
 		$("#dbTarget").css({
 			width: 1000
-		})
+		});
+	});
+
+	afterEach(function() {
+		db.pro.dispose();
 	});
 
 	var createTable = function (width, height) {
 		var table1 = new TableComponent ();
 		table1.setCaption ("Table Component");
-		table1.setDimensions (6, 6);
+		table1.setDimensions (width, height);
 		table1.addColumn("foo", "Foo", {});
 		table1.addColumn("bar", "Bar", {});
 		table1.addColumn("str", "Stringlike");
@@ -80,7 +81,7 @@ describe ("Component KPI Tests - Desktop", function () {
 
 	it("should update the component kpi", function (done) {
 		db = new Dashboard ();
-		var table = createTable(6, 6);
+		var table = createTable(8, 8);
 		table.addComponentKPI("foo", {
 			caption: "Hello",
 			value: 42,
@@ -93,14 +94,13 @@ describe ("Component KPI Tests - Desktop", function () {
 		table.updateComponentKPI("foo", {
 	      value: "10"
 	    });
-
 		var th = new TestHelper ();
 		th.start(done)
-		  .wait(200)
+		  .wait(1000)
 		  .setContext(table.pro.renderer.$core.parent())
 		  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
 		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPICaption", "Hello", {trim: true}) // Trim the text
 		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPIValue", "$10", {trim: true})
 		  .finish();
 	});
-})
+});

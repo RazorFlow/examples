@@ -1,13 +1,14 @@
 describe ("Table Tests", function () {
 	var db;
 	beforeEach(function () {
-		if(db) {
-			db.pro.dispose();
-		}
 		$("#dbTarget").empty().removeClass();
 		$("#dbTarget").css({
 			width: 800
-		})
+		});
+	});
+
+	afterEach(function() {
+		db.pro.dispose();
 	});
 
 	var createTable = function (col1Obj, col2Obj) {
@@ -119,4 +120,4 @@ describe ("Table Tests", function () {
 		  }, "width", function (val) {return 147 < parseInt(val) < 153; })
 		  .finish();
 	});
-})
+});

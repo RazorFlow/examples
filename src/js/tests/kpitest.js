@@ -1,13 +1,14 @@
 describe ("KPI Tests", function () {
 	var db;
 	beforeEach(function () {
-		if(db) {
-			db.pro.dispose();
-		}
 		$("#dbTarget").empty();
 		$("#dbTarget").css({
 			width: 800
-		})
+		});
+	});
+
+	afterEach(function() {
+		db.pro.dispose();
 	});
 
 	it("Should render a basic KPI", function (done) {
@@ -33,4 +34,4 @@ describe ("KPI Tests", function () {
 		  .assertText(".rfKPIValue", "42")
 		  .finish();
 	});
-})
+});

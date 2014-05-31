@@ -1,13 +1,14 @@
 describe ("Component KPI Mobile Tests", function () {
 	var db;
 	beforeEach(function () {
-		if(db) {
-			db.pro.dispose();
-		}
 		$("#dbTarget").empty().removeClass("");
 		$("#dbTarget").css({
 			width: 320
-		})
+		});
+	});
+
+	afterEach(function() {
+		db.pro.dispose();
 	});
 
 	var createTable = function (width, height) {
@@ -39,15 +40,17 @@ describe ("Component KPI Mobile Tests", function () {
 
 		db.addComponent(table);
 		db.embedTo("dbTarget");
-
-		var th = new TestHelper ();
-		th.start(done)
-		  .wait(200)
-		  .setContext(table.pro.renderer.$core.parent())
-		  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
-		  .assertText(".rfMiniKPIContainer:eq(0) .rfKPICaption", "Hello", {trim: true}) // Trim the text
-		  .assertText(".rfMiniKPIContainer:eq(1) .rfKPIValue", "45,000", {trim:true})
-		  .finish();
+		_.defer(function() {
+			var th = new TestHelper ();
+			th.start(done)
+			  .wait(600)
+			  .setContext(table.pro.renderer.$core.parent())
+			  .setContext(".rfKPIGroupContainer", false) // Set the context to the kpi group container. without resetting context
+			  .assertText(".rfMiniKPIContainer:eq(0) .rfKPICaption", "Hello", {trim: true}) // Trim the text
+			  .assertText(".rfMiniKPIContainer:eq(1) .rfKPIValue", "45,000", {trim:true})
+			  .finish();
+		});
+			
 	});
 
 	it("Should format the numbers of component kpi", function (done) {
@@ -195,4 +198,4 @@ describe ("Component KPI Mobile Tests", function () {
 		  .assertCSS(".", "height", function (val) { return 160 < parseInt(val) < 170})
 		  .finish();
 	});	
-})
+});
