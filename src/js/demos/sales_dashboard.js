@@ -10,6 +10,22 @@ var randomGen = function(num, max) {
     for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));
     return arr;
 };
+
+function average (arr)
+{
+    return _.reduce(arr, function(memo, num)
+    {
+        return memo + num;
+    }, 0) / arr.length;
+}
+function sum (arr)
+{
+    return _.reduce(arr, function(memo, num)
+    {
+        return memo + num;
+    }, 0);
+}
+
 StandaloneDashboard(function (db) {
     db.setDashboardTitle('Sales Dashboard');
 
@@ -42,17 +58,50 @@ StandaloneDashboard(function (db) {
     c5.setDimensions(6, 6);
     c5.setCaption('Sales per product category');
     c5.setLabels(['Beverages', 'Condiments', 'Dairy Products', 'Grains / Cereal', 'Meat / Poultry']);
-    var sales = randomGen(5, 40000).sort(function(a, b) {return a < b;});
-    c5.addSeries('sales', 'Sales', sales, {numberPrefix: "$"});
+    var salesData = randomGen(5, 40000).sort(function(a, b) {return a < b;});
+    c5.addSeries('sales', 'Sales', salesData, {numberPrefix: "$"});
     c5.setYAxis('', {numberPrefix: '$'});
+    c5.addComponentKPI ("average", {
+        caption: "Average",
+        value: average(salesData),
+        numberPrefix: "$",
+        numberHumanize: true,
+        numberDecimalPoints: 1
+    });
+
+    c5.addComponentKPI ("total", {
+        caption: "Total",
+        value: sum(salesData),
+        numberPrefix: "$",
+        numberHumanize: true,
+        numberDecimalPoints: 1
+    });
+
     db.addComponent(c5);
 
+    var employeeSalesData = [56500, 57590, 65820, 79960, 82030];
     var c6 = new ChartComponent();
     c6.setDimensions(6, 6);
     c6.setCaption('Sales per employee');
     c6.setLabels(['Robert', 'Margaret', 'Nancy', 'Andrew', 'Janet']);
-    c6.addSeries('sales', 'Sales', [56500, 57590, 65820, 79960, 82030], {seriesDisplayType: 'column'});
+    c6.addSeries('sales', 'Sales', employeeSalesData, {seriesDisplayType: 'column'});
     c6.setYAxis('', {numberPrefix: '$'});
+
+    c6.addComponentKPI ("average", {
+        caption: "Average",
+        value: average(employeeSalesData),
+        numberPrefix: "$",
+        numberHumanize: true,
+        numberDecimalPoints: 1
+    });
+
+    c6.addComponentKPI ("total", {
+        caption: "Total",
+        value: sum(employeeSalesData),
+        numberPrefix: "$",
+        numberHumanize: true,
+        numberDecimalPoints: 1
+    });
     db.addComponent(c6);
     
     var c7 = new ChartComponent();
