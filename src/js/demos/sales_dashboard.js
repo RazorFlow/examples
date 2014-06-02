@@ -87,7 +87,6 @@ StandaloneDashboard(function (db) {
     c6.addSeries('sales', 'Sales', employeeSalesData, {seriesDisplayType: 'column'});
     c6.setYAxis('', {numberPrefix: '$'});
     var avVal = average(employeeSalesData);
-    console.log(avVal);
     c6.addComponentKPI ("average", {
         caption: "Average",
         value: avVal,

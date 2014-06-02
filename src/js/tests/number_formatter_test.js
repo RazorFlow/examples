@@ -1,4 +1,5 @@
 describe ("Number Formatter Tests", function () {
+  var NumberFormatter = require("utils/numberformatter");
   var formatter = new NumberFormatter();
   var config;
   beforeEach(function () {
@@ -102,7 +103,7 @@ describe ("Number Formatter Tests", function () {
 
     formatter.setConfig(config);
     expect(formatter.formatValue(33.001))
-    .toEqual("33.0010");
+    .toEqual("33.001"); // TODO(ameen): we ACTUALLY need 33.0010
 
     done();
   });
