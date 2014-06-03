@@ -25,6 +25,27 @@ StandaloneDashboard(function (db) {
     });
     db.addComponent(c2);
 
+    var stackedChart = new ChartComponent();
+    stackedChart.setDimensions (6, 4);
+    stackedChart.setCaption("Stacked category sales");   
+    stackedChart.setLabels (["Jan", "Feb", "Mar"]);
+    stackedChart.setYAxis("", {
+        numberPrefix: "$"
+    });
+    stackedChart.addSeries ("beverages", "Beverages", [1355, 1916, 1150], {
+        seriesStacked: true,
+        seriesDisplayType: "column"
+    });
+    stackedChart.addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321], {
+        seriesStacked: true,
+        seriesDisplayType: "column"
+    });
+    stackedChart.addSeries ("vegetables", "Vegetables", [1313, 1976, 924], {
+        seriesStacked: true,
+        seriesDisplayType: "column"
+    });
+    db.addComponent (stackedChart);  
+
     var c3 = new ChartComponent();
     c3.setDimensions(6,4);
     c3.setCaption('Unit Distribution By Genre');
@@ -34,6 +55,7 @@ StandaloneDashboard(function (db) {
         numberSuffix: '%'
     });
     db.addComponent(c3);
+
 
     var c4 = new ChartComponent();
     c4.setDimensions(6, 4);

@@ -4,7 +4,10 @@ class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $chart = new ChartComponent("2011_sales");
     $chart->setDimensions (4, 4);
-	$chart->setCaption("First Chart");	
+	$chart->setCaption("Stacked Column Chart");	
+	$chart->setYAxis ("", array(
+		'numberPrefix' => "$"
+	));
 	$chart->setLabels (["Jan", "Feb", "Mar"]);
 	$chart->addSeries ("beverages", "Beverages", [1355, 1916, 1150], array(
 		'numberPrefix' => "$",

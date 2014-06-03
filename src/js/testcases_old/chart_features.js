@@ -16,6 +16,8 @@ StandaloneDashboard(function(db) {
     c2.addSeries("seriesB", "Series B", [3, 1, 9, 2, 3], {seriesDisplayType: 'line'});
     db.addComponent (c2);
 
+
+
     var c4 = new ChartComponent();
     c4.setCaption ("Mixed Line and Column");
     c4.setDimensions(4,4);
