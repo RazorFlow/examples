@@ -103,8 +103,6 @@ describe ("Number Formatter Tests", function () {
 
     formatter.setConfig(config);
     expect(formatter.formatValue(33.001))
-    .toEqual("33.0010"); // TODO(ameen): we ACTUALLY need 33.0010
-
     done();
   });
 
