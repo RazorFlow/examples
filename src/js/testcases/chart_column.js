@@ -19,10 +19,9 @@ StandaloneDashboard(function (db) {
     var c3 = new ChartComponent();
     c3.setCaption("Column Chart multi-series");
     c3.setDimensions(4, 4);
-    c3.stacked();
     c3.setLabels(['January', 'February', 'March', 'April', 'May']);
-    c3.addSeries("seriesA", "Series A", [1, 3, 5, 1, 9], {seriesDisplayType: 'column', numberPrefix: '$'});
-    c3.addSeries("seriesB", "Series B", [9, 1, 5, 3, 1], {seriesDisplayType: 'column', numberPrefix: '$'});
+    c3.addSeries("seriesA", "Series A", [1, 3, 5, 1, 9], {seriesDisplayType: 'column', numberPrefix: '$', seriesStacked: true});
+    c3.addSeries("seriesB", "Series B", [9, 1, 5, 3, 1], {seriesDisplayType: 'column', numberPrefix: '$', seriesStacked: true});
  
     db.addComponent(c3);
 });
