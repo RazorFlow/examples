@@ -51,10 +51,9 @@ StandaloneDashboard(function (db) {
     var c7 = new ChartComponent();
     c7.setCaption("Chart Negative Bar Stacked");
     c7.setDimensions(4, 4);
-    c7.stacked();
     c7.setLabels(['January', 'February', 'March', 'April', 'May']);
-    c7.addSeries("seriesA", "Series A", [1, 3, -5, 1, 9], {seriesDisplayType: 'bar', numberPrefix: '$'});
-    c7.addSeries("seriesB", "Series B", [9, 1, 5, -3, 1], {seriesDisplayType: 'bar', numberPrefix: '$'});
+    c7.addSeries("seriesA", "Series A", [1, 3, -5, 1, 9], {seriesDisplayType: 'bar', numberPrefix: '$', seriesStacked: true});
+    c7.addSeries("seriesB", "Series B", [9, 1, 5, -3, 1], {seriesDisplayType: 'bar', numberPrefix: '$', seriesStacked: true});
     db.addComponent(c7);
 
 });
