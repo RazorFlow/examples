@@ -2,10 +2,8 @@ rf.StandaloneDashboard(function(db){
     var chart = new ChartComponent();
     chart.setDimensions (4, 4);
     chart.setYAxis("Sales", {
-        numberPrefix: "$ "
-    });
-    chart.addYAxis('quantity', "Quantity", {
-        numberPrefix: "$ "
+        numberPrefix: "$ ",
+        numberHumanize: true
     });
     chart.setCaption("Car sales and quantity");    
     chart.setLabels (["Jan", "Feb", "Mar"]);
