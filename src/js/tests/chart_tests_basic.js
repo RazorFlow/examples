@@ -7,6 +7,8 @@ describe ("Basic Chart Tests", function () {
 		});
 	});
 
+	var chart_timeout = 400;
+
 	afterEach(function() {
 		db.pro.dispose();
 		$(".rfTooltip").remove();
@@ -24,7 +26,7 @@ describe ("Basic Chart Tests", function () {
 		chart.setCaption("2011 Sales");	
 		chart.setLabels (["Beverages", "Vegetables"])
 		chart.addSeries ("sales", "Sales", [1343, 7741], seriesA);
-		chart.addSeries ("quantity", "Quantity", [76, 119], seriesB);
+		chart.addSeries ("quantity", "Quantity", [300, 800], seriesB);
 		return chart;
 	}
 
@@ -37,7 +39,7 @@ describe ("Basic Chart Tests", function () {
 
 		var th = new TestHelper ();
 		th.start(done)
-		  .wait(200)
+		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .drillContext(".rc-axis:eq(0)")
 		  .assertText("text:eq(0)", "Beverages")
@@ -55,7 +57,7 @@ describe ("Basic Chart Tests", function () {
 
 		var th = new TestHelper ();
 		th.start(done)
-		  .wait(200)
+		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .drillContext(".rc-axis:eq(1)")
 		  .assertText("text:eq(0)", "0")
@@ -74,7 +76,7 @@ describe ("Basic Chart Tests", function () {
 		db.embedTo("dbTarget");
 
 		t3.start(done)
-		  .wait(200)
+		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .drillContext(".rc-axis:eq(1)")
 		  .assertText("text:eq(1)", "$1,600")
@@ -89,17 +91,17 @@ describe ("Basic Chart Tests", function () {
 		db.embedTo("dbTarget");
 
 		t3.start(done)
-		  .wait(200)
+		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .drillContext("g.rc-series-1")
-		  .svgMeasure("rect:eq(0)", "width", t3.approximate(36, 1))
+		  .svgMeasure("rect:eq(0)", "width", t3.approximate(36, 2))
 		  .svgMeasure("rect:eq(0)", "height", t3.approximate(33, 1))
 		  .svgMeasure("rect:eq(1)", "height", t3.approximate(191, 2))
-		  .svgMeasure("rect:eq(1)", "width", t3.approximate(36, 1))
+		  .svgMeasure("rect:eq(1)", "width", t3.approximate(36, 2))
 		  .finish();
 	});
 
-	it("Should display a VALID tooltip when there's a mouseover event", function (done) {
+	it("Should display a valid tooltip when there's a mouseover event", function (done) {
 		db = new Dashboard ();
 		var chart = createChart({}, {}, {
 			numberPrefix: "$"
@@ -109,7 +111,7 @@ describe ("Basic Chart Tests", function () {
 		db.embedTo("dbTarget");
 
 		t3.start(done)
-		  .wait(200)
+		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .svgTriggerEvent("rect:eq(0)", "mouseover")
 		  .wait(200)
@@ -117,7 +119,7 @@ describe ("Basic Chart Tests", function () {
 		  	.assertText(".rfTooltipLabel", "Sales", {trim: true})
 		  	.assertText(".rfTooltipValue", "$1,343")
 		  	.assertText(".rfTooltipMainLabel", "Beverages")
-		  	.assertCSS(".", "left", t3.approximate(68, 2))
+		  	.assertCSS(".", "left", t3.approximate(67, 3))
 		  	.assertCSS(".", "top", t3.approximate(205, 2))
 		  .exitTempContext()
 		  .svgTriggerEvent("rect:eq(0)", "mouseout")
@@ -134,4 +136,68 @@ describe ("Basic Chart Tests", function () {
 		  .svgTriggerEvent("rect:eq(1)", "mouseout")
 		  .finish();
 	});
+
+	it("Should hide/show a series after clicking legend", function (done) {
+		db = new Dashboard ();
+		var chart = createChart({}, {}, {
+			numberPrefix: "$"
+		});
+
+		db.addComponent(chart);
+		db.embedTo("dbTarget");
+
+		t3.start(done)
+		  .wait(chart_timeout)
+		  .setContext(chart.pro.renderer.$core)
+		  .click('.rfLegendKey:eq(0)')
+		  .wait(200)
+		  .setContext (function () {
+		  	return chart.pro.renderer.$core;
+		  })
+		  .assertClass('.rfLegendKey:eq(0)', "disabled")
+		  .assert(function (contextDiv, success, fail) {
+		  	if(contextDiv.find(".rc-column-chart").children().length !== 1) {
+		  		fail("Expected column chart container to have just 1 child. It doesn't.");
+		  	}
+		  	success ();
+		  })
+		  .click('.rfLegendKey:eq(0)')
+		  .wait(200)
+		  .setContext (function () {
+		  	return chart.pro.renderer.$core;
+		  })
+		  .assert(function (contextDiv, success, fail) {
+		  	if(contextDiv.find(".rc-column-chart").children().length !== 2) {
+		  		fail("Expected column chart container to have just 2 children. It doesn't.");
+		  	}
+		  	success ();
+		  })
+		  .finish();
+	});
+
+	it("Should respect series colors everywhere", function (done) {
+		db = new Dashboard ();
+		var chart = createChart({
+			seriesColor: "#a4c9f3"
+		}, { seriesColor: "red"}, {
+		});
+
+		db.addComponent(chart);
+		db.embedTo("dbTarget");
+
+		t3.start(done)
+		  .wait(chart_timeout)
+		  .setContext(chart.pro.renderer.$core.parent())
+		  .enterTempContext("g.rc-series-1")
+		  	.assertAttrs("rect:eq(0)", "fill", "#a4c9f3")
+		  .exitTempContext("g.rc-series-1")
+		  .enterTempContext("g.rc-series-2")
+		  	.assertAttrs("rect:eq(0)", "fill", "#ff0000")
+		  .exitTempContext("g.rc-series-2")
+		  .assertCSS(".rfLegendKey:eq(0) > .legendColor", "background-color", "rgb(164, 201, 243)")
+		  .assertCSS(".rfLegendKey:eq(1) > .legendColor", "background-color", "rgb(255, 0, 0)")
+		  .finish();
+	});
+
+
 });
