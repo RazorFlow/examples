@@ -8,8 +8,6 @@ class SampleDashboard extends StandaloneDashboard {
       "numberPrefix" => "$",
       "numberHumanize" => true
     ));
-    $chart->addYAxis("quantity", "Quantity", array(
-    ));
     $chart->setDimensions (4, 4);
     $chart->setLabels (["Jan", "Feb", "Mar"]);
     $chart->addSeries ("sales", "Sales", [1355340, 2214134, 1854313], array(
@@ -17,7 +15,6 @@ class SampleDashboard extends StandaloneDashboard {
       "numberPrefix" => "$"
     ));
     $chart->addSeries ("car_quantity", "Quantity", [14, 19, 17], array(
-      "yAxis" => "quantity"
     ));
 
     $this->addComponent ($chart);

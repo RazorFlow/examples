@@ -7,7 +7,7 @@ rf.StandaloneDashboard(function(db){
     });
     chart.setCaption("Car sales and quantity");    
     chart.setLabels (["Jan", "Feb", "Mar"]);
-    chart.addSeries ("quantity", "Sales", [1355340, 2214134, 1854313], {
+    chart.addSeries ("sales", "Sales", [1355340, 2214134, 1854313], {
         numberPrefix: '$',
         seriesDisplayType: 'column'
     });
