@@ -94,7 +94,7 @@ describe ("Basic Chart Tests", function () {
 		  .wait(chart_timeout)
 		  .setContext(chart.pro.renderer.$core.parent())
 		  .drillContext("g.rc-series-1")
-		  .count('rect', 2, {op: '='})
+		  .count('rect', 2, {op: '=`'})
 		  .svgMeasure("rect:eq(0)", "width", t3.approximate(36, 2))
 		  .svgMeasure("rect:eq(0)", "height", t3.approximate(33, 1))
 		  .svgMeasure("rect:eq(1)", "height", t3.approximate(191, 2))
