@@ -33,7 +33,7 @@ class SampleDashboard extends StandaloneDashboard {
     $c2->setCaption("Filter items in stock");
     $c2->setDimensions (6, 6);
     $c2->addTextFilter('contains', 'Product Name Contains');
-    $c2->addNumericRangeFilter ('stock', 'Units In Stock');
+    $c2->addNumericRangeFilter ('stock', 'Units In Stock', array(10, 100));
     $c2->addCheckboxFilter ('discontinued', 'Exclude Discontinued Items', false);
 
     $this->addComponent($c2);
