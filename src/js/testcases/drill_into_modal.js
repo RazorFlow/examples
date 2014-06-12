@@ -1,133 +1,23 @@
-rf.StandaloneDashboard(function(db){
+rf.StandaloneDashboard(function(db) {
 
+  var chart = new ChartComponent('chart1');
+  chart.setDimensions (4, 4);
+  chart.setCaption("Expenses incurred on Food Consumption by Year");
+  chart.setLabels (["2009", "2010", "2011"]);
+  chart.addSeries ("beverages", "Beverages", [1355, 1916, 1150]);
 
-    var data = [];
-    var startDate = new Date('1 Jan 2011');
+  var chart2 = new ChartComponent('chart2');
+  chart2.hideComponent();
 
-    while(startDate.getTime() !== (new Date('1 Jan 2014')).getTime()) {
-        var obj = {};
-        obj['id'] = 'iphone';
-        obj['name'] = 'iPhone';
-        obj['sales'] = Math.floor(Math.random() * 100);
-        obj['date'] = new Date(startDate.getTime());
-        data.push(obj);
-        startDate.setDate(startDate.getDate() + 1);
-    }
-    startDate = new Date('1 Jan 2011');
-    while(startDate.getTime() !== (new Date('1 Jan 2014')).getTime()) {
-        var obj = {};
-        obj['id'] = 'ipad';
-        obj['name'] = 'iPad';
-        obj['sales'] = Math.floor(Math.random() * 100);
-        obj['date'] = new Date(startDate.getTime());
-        data.push(obj);
-        startDate.setDate(startDate.getDate() + 1);
-    }
+  db.addComponent (chart);
+  db.addComponent (chart2);
 
-    var labels = ['2011', '2012', '2013'];
-    var iphone = _.filter(data, function(item) {
-        return item.id === 'iphone';
-    });
-    var ipad = _.filter(data, function(item) {
-        return item.id === 'ipad';
-    });
+  chart.onItemClick(function(params) {
+    chart2.lock();
+    chart2.setLabels(['A', 'B', 'C']);
+    chart2.addSeries ("food", params.label, [params.value + 10, params.value + 100, params.value + 150]);
+    chart2.showAsModal();
+    chart2.unlock();
+  });
 
-    var aggregateYearlyData = function(rows, year) {
-        var yearData = _.filter(rows, function(item) {
-            return item.date.getFullYear() === year;
-        });
-
-        var yearSales = _.pluck(yearData, 'sales');
-
-        return _.reduce(yearSales, function(mem, item) {
-            return mem + item;
-        }, 0);
-    };
-
-    var aggregateMonthlyData = function(rows, year, month) {
-        var monthData = _.filter(rows, function(item) {
-            return  item.date.getFullYear() === year && item.date.getMonth() === month;
-        });
-
-        var monthSales = _.pluck(monthData, 'sales');
-
-        return _.reduce(monthSales, function(mem, item) {
-            return mem + item;
-        }, 0);
-    };
-
-    var iphoneYearly = [aggregateYearlyData(iphone, 2011), aggregateYearlyData(iphone, 2012), aggregateYearlyData(iphone, 2013)];
-    var ipadYearly = [aggregateYearlyData(ipad, 2011), aggregateYearlyData(ipad, 2012), aggregateYearlyData(ipad, 2013)];
-    
-
-    var chart1 = new ChartComponent('');
-    chart1.setDimensions (4, 4);
-    chart1.setCaption("Expenses incurred on Food Consumption by Year");
-    chart1.setLabels (labels);
-    chart1.addSeries ("iphone", "iPhone", iphoneYearly);
-    chart1.addSeries("ipad", "iPad", ipadYearly); 
-    db.addComponent (chart1);
-
-    // Create the chart and cofigure the starting params
-    var chart = new ChartComponent('someid');
-    chart.setDimensions (8, 8);
-    chart.setCaption("Sales Trends");  
-    chart.setLabels (labels)
-    chart.addSeries("iphone", "iPhone", iphoneYearly);
-    chart.addSeries("ipad", "iPad", ipadYearly); 
-    
-    var drillYear = null,
-        drillMonth = null,
-        monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    // Add drill step
-    chart.addDrillStep(function(done, params, updatedComponent) {
-        var year = +params.label;
-        var iphoneData = [];
-        var ipadData = [];
-
-        for(var i=-1; ++i<12;) {
-            iphoneData.push(aggregateMonthlyData(iphone, year, i));
-            ipadData.push(aggregateMonthlyData(ipad, year, i));
-        }
-        updatedComponent.setLabels(monthLabels);
-        updatedComponent.addSeries('iphone', 'iPhone', iphoneData);
-        updatedComponent.addSeries('ipad', 'iPad', ipadData);
-        drillYear = year;
-        done();
-    });
-
-    chart.addDrillStep(function(done, params, updatedComponent) {
-        var month = monthLabels.indexOf(params.label),
-            year = drillYear;
-
-        var iphoneData = _.pluck(_.filter(iphone, function(item) {
-            return  item.date.getFullYear() === year && item.date.getMonth() === month;
-        }), 'sales');
-        var ipadData = _.pluck(_.filter(ipad, function(item) {
-            return  item.date.getFullYear() === year && item.date.getMonth() === month;
-        }), 'sales');
-
-        var newLabels = [];
-
-        for(var i=-1; ++i<iphoneData.length;) {
-            newLabels.push('' + (i+1));
-        }
-        updatedComponent.setLabels(newLabels);
-        updatedComponent.addSeries('iphone', 'iPhone', iphoneData);
-        updatedComponent.addSeries('ipad', 'iPad', ipadData);
-        drillMonth = month;
-        done();
-    });
-
-    chart.bind('drillActivate', function(data) {
-        console.log('`drillActivate` event triggered with ', data);
-    });
-
-    chart.hideComponent();
-    db.addComponent (chart);
-
-    chart1.onItemClick(function() {
-        chart.showAsModal();
-    });
 });

@@ -12,8 +12,6 @@ class SampleDashboard extends StandaloneDashboard {
         $c2 = new ChartComponent('my_chart2');
         $c2->setDimensions(6,4);
         $c2->setCaption('Units By Year');
-        $c2->setLabels(['2007', '2008', '2009', '2010', '2011']);
-        $c2->addSeries('units', 'Units', [454, 455, 236, 195, 442]);
         $c2->hideComponent();
 
         $chart1->onItemClick(array($chart1, $c2), 'handleClick', $this);
@@ -24,6 +22,9 @@ class SampleDashboard extends StandaloneDashboard {
 
     public function handleClick($source, $target, $params) {
         $chart = $this->getComponentByID('my_chart2');
+        $chart->clearChart();
+        $chart->setLabels(['2007', '2008', '2009', '2010']);
+        $chart->addSeries('units', 'Currency', [45, 45, 23, 19]);
         $chart->showAsModal();
     }
 }
