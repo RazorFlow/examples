@@ -9,15 +9,15 @@ rf.StandaloneDashboard(function(db){
 
 	var targetChart = new ChartComponent();
     targetChart.hideComponent();
-    targetChart.lock();
     db.addComponent (targetChart);
 
 	sourceChart.onItemClick(function(params) {
+        targetChart.lock();
         targetChart.setCaption ("Zone-wise breakdown of " + params.label);
         // You can filter/process the data as required.
         targetChart.setLabels (["North Zone", "South Zone"]);
         targetChart.addSeries ("sales", "Sales", [21, 46]);
-        targetChart.unlock();
         targetChart.showAsModal();
+        targetChart.unlock();
     });
 });
