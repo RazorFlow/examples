@@ -3,7 +3,7 @@
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $chart = new ChartComponent("my_first_chart");
-    $chart->setCaption("Car Sales figures";
+    $chart->setCaption("Car Sales figures");
     $chart->setYAxis("Sales", array(
       "numberPrefix" => "$",
       "numberHumanize" => true
