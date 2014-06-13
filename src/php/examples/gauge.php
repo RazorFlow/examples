@@ -5,7 +5,7 @@ class SampleDashboard extends StandaloneDashboard {
 
     $gauge = new GaugeComponent("gauge");
     $gauge->setDimensions(4,3);
-    $gauge->setCaption('Gauge Test');
+    $gauge->setCaption('Points');
     $gauge->setValue(144, array("numberPrefix" => '$'));
     $gauge->setLimits(0, 200);
 
