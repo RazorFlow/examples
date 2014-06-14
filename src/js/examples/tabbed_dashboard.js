@@ -61,7 +61,11 @@ StandaloneDashboard(function (tdb) {
     db2.addComponent(c3);
 
 
-	tdb.addDashboardTab(db1);
-	tdb.addDashboardTab(db2);
+	tdb.addDashboardTab(db1, {
+        title: 'Table Dashboard'
+    });
+	tdb.addDashboardTab(db2, {
+        active: true
+    });
 
 }, {tabbed: true});
