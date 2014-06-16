@@ -29,7 +29,14 @@ class SampleDashboard extends StandaloneDashboard {
   	$topArtistsChart->setCaption ("Top 5 Artists by Revenue");
   	$top_artists = $this->getTopArtists();
   	$topArtistsChart->setLabels (ArrayUtils::pluck($top_artists, "Name"));
-  	$topArtistsChart->addSeries ('top_artists', "Top Artists", ArrayUtils::pluck($top_artists, "total_sales"));
+  	$topArtistsChart->addSeries ('drink', "DRINK", ArrayUtils::pluck($top_artists, "total_sales"), array(
+      'seriesStacked' => true,
+      'seriesDisplayType' => "column"
+    ));
+    $topArtistsChart->addSeries ('food', "FOOD", ArrayUtils::pluck($top_artists, "total_sales"), array(
+      'seriesStacked' => true,
+      'seriesDisplayType' => "column"
+    ));
   	$this->addComponent($topArtistsChart);
 
   	$topAlbumsChart = new ChartComponent ('c2');
