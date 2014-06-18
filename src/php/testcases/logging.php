@@ -21,7 +21,7 @@ class SampleDashboard extends StandaloneDashboard {
         );
 
         $this->log('KPI Object', "hello");
-        $this->log('KPI', $this);
+        $this->log('KPI', "I am a kpi object");
 
         $kpi->bindToEvent ("kpiClick", array($kpi), "handleKPIClick", $this);
         $kpi2->bindToEvent ("kpiClick", array($kpi2), "handleKPIClick2", $this);
@@ -40,8 +40,9 @@ class SampleDashboard extends StandaloneDashboard {
     public function handleKPIClick2 ($source, $targets, $params) {
         $this->log('Yo', 44);
         // $kpi2 = $this->getComponentByID("kpi1");
-        $kpi2->setValue (55);
-        $kpi2->setCaption ("Hello to you too");
+        // $kpi2->setValue (55);
+        // $kpi2->setCaption ("Hello to you too");
+        hello();
         $this->log('A', $params);
     }
 }
