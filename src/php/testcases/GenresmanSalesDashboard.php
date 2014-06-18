@@ -51,88 +51,88 @@ class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard () {
     $this->setDashboardTitle ("Genresman Dashboard");
 
-  	$dailySales = new ChartComponent ('c1');
-    $dailySales->setDimensions (6, 6);
-    $dailySales->setCaption ("Daily Sales");
-    $dailySalesData = $this->getDailySales('2014-04-23','2014-05-01');
-    $dailySales->setYAxis("DRINK", array(
-      "numberHumanize" => true
-    ));
-    $dailySales->addYAxis("food", "FOOD", array(
-    ));
-    $dailySales->setLabels (ArrayUtils::pluck($dailySalesData, "tarih2"));
-    $dailySales->addSeries ('drink', "DRINK", ArrayUtils::pluck($dailySalesData, "cikis"), array(
-      "numberHumanize" => true,
-    ));
-    $dailySalesFoodData = $this->getDailySalesFood('2014-04-23','2014-05-01');
-    $dailySales->addSeries ('food', "FOOD", ArrayUtils::pluck($dailySalesFoodData, "cikis"), array(
-      "numberHumanize" => true,
-      "yAxis" => "food"
-    ));
-    $this->addComponent($dailySales);
-
-
-    $monthlySales = new ChartComponent ('c2');
-    $monthlySales->setDimensions (6, 6);
-    $monthlySales->setCaption ("Monthly Sales");
-    $monthlySalesData = $this->getMonthlySales();
-    $monthlySales->setYAxis("DRINK", array(
-      "numberHumanize" => true
-    ));
-    $monthlySales->addYAxis("food", "FOOD", array(
-    ));
-    $monthlySales->setLabels (ArrayUtils::pluck($monthlySalesData, "ay"));
-    $monthlySales->addSeries ('drink', "DRINK", ArrayUtils::pluck($monthlySalesData, "cikis"), array(
-      "numberHumanize" => true,
-    ));
-    $monthlySalesFood = $this->getMonthlySalesFood();
-    $monthlySales->addSeries ('food', "FOOD", ArrayUtils::pluck($monthlySalesFood, "cikis"), array(
-      "numberHumanize" => true,
-      "yAxis" => "food"
-    ));
-    $this->addComponent($monthlySales);
-
-
-    $item = new ChartComponent('c3');
-    $item->setDimensions(6,6);
-    $item->setCaption("Item Categories");
-    $itemCategories = $this->getItemCategories('2014-04-23','2014-05-01');
-    $item->setLabels (ArrayUtils::pluck($itemCategories, "grupadi"));
-    $item->addSeries ('items', "Items", ArrayUtils::pluck($itemCategories, "cikis"), array(
-      "numberHumanize" => true
-    ));
-    $this->addComponent ($item);
-
-    $chart = new ChartComponent("pie_chart");
-    $chart->setCaption("Clerk Sales");
-    $chart->setDimensions (4, 4);
-    $clerkData = $this->getClerkSales('2014-04-23','2014-05-01');
-    $chart->setLabels (ArrayUtils::pluck($clerkData, "garson"));
-    $chart->setPieValues (ArrayUtils::pluck($clerkData, "cikis"));
-
-    $this->addComponent ($chart);
-
-    $hour = new ChartComponent('c4');
-    $hour->setDimensions(6,6);
-    $hour->setCaption("Hourly Sales");
-    $hourlySales = $this->getHourlySales('2014-04-23','2014-05-01');
-    $hour->setLabels (ArrayUtils::pluck($hourlySales, "SAAT"));
-    $hour->addSeries ('items', "Items", ArrayUtils::pluck($hourlySales, "CIKIS"), array(
-      "numberHumanize" => true
-    ));
-    $this->addComponent ($hour);
-
     $filter = new FilterComponent('filter1');
     $filter->setCaption ("Filter Employees");
-    $filter->setDimensions (4, 4);
+    $filter->setDimensions (12, 3);
     $filter->addDateRangeFilter('datebtw', 'Select Date', array(
         "defaultStartDate" => "2014-04-23",
         "defaultEndDate" => "2014-05-01"
     ));
 
-    $filter->onApplyClick (array($dailySales, $item, $chart, $hour), "handleFilter", $this);
-
     $this->addComponent($filter);
+
+  	$dailySales = new ChartComponent ('c1');
+    $dailySales->setDimensions (7, 6);
+    $dailySales->setCaption ("Daily Sales");
+    $dailySalesData = $this->getDailySales('2014-04-23','2014-05-01');
+    $dailySales->setYAxis("Revenue", array(
+      "numberHumanize" => true
+    ));
+    $dailySales->addYAxis("covers", "Covers", array(
+    ));
+    $dailySales->setLabels (ArrayUtils::pluck($dailySalesData, "tarih2"));
+    $dailySales->addSeries ('food', "Food", ArrayUtils::pluck($dailySalesData, "cikis"));
+    $dailySalesFoodData = $this->getDailySalesFood('2014-04-23','2014-05-01');
+    $dailySales->addSeries ('covers', "Covers", ArrayUtils::pluck($dailySalesFoodData, "cikis"), array(
+      "yAxis" => "covers",
+      "seriesDisplayType" => "line"
+    ));
+    $this->addComponent($dailySales);
+
+
+    $monthlySales = new ChartComponent ('c2');
+    $monthlySales->setDimensions (5, 6);
+    $monthlySales->setCaption ("Monthly Sales");
+    $monthlySalesData = $this->getMonthlySales();
+    $monthlySales->setYAxis("Revenue", array(
+      "numberHumanize" => true
+    ));
+    $monthlySales->addYAxis("covers", "Covers", array(
+    ));
+    $monthlySales->setLabels (ArrayUtils::pluck($monthlySalesData, "ay"));
+    $monthlySales->addSeries ('food', "Food", ArrayUtils::pluck($monthlySalesData, "cikis"));
+    $monthlySalesFood = $this->getMonthlySalesFood();
+    $monthlySales->addSeries ('covers', "Covers", ArrayUtils::pluck($monthlySalesFood, "cikis"), array(
+      "yAxis" => "food",
+      "seriesDisplayType" => "line"
+    ));
+    $this->addComponent($monthlySales);
+
+
+    $item = new ChartComponent('c3');
+    $item->setDimensions(7,6);
+    $item->setCaption("Item Categories");
+    $item->setYAxis("", array(
+      "numberHumanize" => true
+    ));
+    $itemCategories = $this->getItemCategories('2014-04-23','2014-05-01');
+    $item->setLabels (ArrayUtils::pluck($itemCategories, "grupadi"));
+    $item->addSeries ('items', "Items", ArrayUtils::pluck($itemCategories, "cikis"));
+    $this->addComponent ($item);
+
+    $chart = new ChartComponent("pie_chart");
+    $chart->setCaption("Clerk Sales");
+    $chart->setDimensions (5, 6);
+    $clerkData = $this->getClerkSales('2014-04-23','2014-05-01');
+    $chart->setLabels (ArrayUtils::pluck($clerkData, "garson"));
+    $chart->setPieValues (ArrayUtils::pluck($clerkData, "cikis"), array(
+      "numberHumanize" => true
+    ));
+
+    $this->addComponent ($chart);
+
+    $hour = new ChartComponent('c4');
+    $hour->setDimensions(12,6);
+    $hour->setCaption("Hourly Sales");
+    $hour->setYAxis("", array(
+      "numberHumanize" => true
+    ));
+    $hourlySales = $this->getHourlySales('2014-04-23','2014-05-01');
+    $hour->setLabels (ArrayUtils::pluck($hourlySales, "SAAT"));
+    $hour->addSeries ('items', "Items", ArrayUtils::pluck($hourlySales, "CIKIS"));
+    $this->addComponent ($hour);
+
+    $filter->onApplyClick (array($dailySales, $item, $chart, $hour), "handleFilter", $this);
   }
 
   public function handleFilter ($source, $target, $params) {
@@ -150,13 +150,13 @@ class SampleDashboard extends StandaloneDashboard {
 
     $dailySalesData = $this->getDailySales($dateStartString, $dateEndString);
     $dailySales->setLabels (ArrayUtils::pluck($dailySalesData, "tarih2"));
-    $dailySales->addSeries ('drink', "DRINK", ArrayUtils::pluck($dailySalesData, "cikis"), array(
+    $dailySales->addSeries ('food', "Food", ArrayUtils::pluck($dailySalesData, "cikis"), array(
       "numberHumanize" => true,
     ));
     $dailySalesFoodData = $this->getDailySalesFood($dateStartString, $dateEndString);
-    $dailySales->addSeries ('food', "FOOD", ArrayUtils::pluck($dailySalesFoodData, "cikis"), array(
+    $dailySales->addSeries ('covers', "Covers", ArrayUtils::pluck($dailySalesFoodData, "cikis"), array(
       "numberHumanize" => true,
-      "yAxis" => "food"
+      "yAxis" => "covers"
     ));
 
     $itemCategories = $this->getItemCategories($dateStartString, $dateEndString);
