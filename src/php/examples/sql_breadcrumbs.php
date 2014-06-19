@@ -55,7 +55,9 @@ class LocationDrillDashboard extends StandaloneDashboard {
 	}
 
 	public function get_monthwise($source, $target, $params) {
-		$monthwise = $this->pdo->query("SELECT SUM(amount) as total_amount, strftime('%m', paymentDate) as payment_month FROM Payments NATURAL JOIN Customers where strftime('%Y', Payments.paymentDate)='".$params['label']."' GROUP BY payment_month;")->fetchAll(PDO::FETCH_ASSOC);
+		$monthwiseQuery = $this->pdo->prepare("SELECT SUM(amount) as total_amount, strftime('%m', paymentDate) as payment_month FROM Payments NATURAL JOIN Customers where strftime('%Y', Payments.paymentDate)=:paymentYear GROUP BY payment_month;");
+		$monthwiseQuery->execute(array('paymentYear' => $params['label']));
+		$monthwise = $monthwiseQuery->fetchAll(PDO::FETCH_ASSOC);
 		$source->clearChart();
 		$monthArr = ArrayUtils::pluck($monthwise, 'payment_month');
 		for ($i = 0; $i < count($monthArr); $i++) {
@@ -69,7 +71,9 @@ class LocationDrillDashboard extends StandaloneDashboard {
 
 	public function get_daywise($source, $target, $params) {
 		$month = array_search($params['label'], $this->monthName);
-		$daywise = $this->pdo->query("SELECT SUM(amount) as total_amount, strftime('%d', paymentDate) as payment_day FROM Payments NATURAL JOIN Customers where strftime('%Y', Payments.paymentDate)='".$params['labelList'][0]."' and strftime('%m', Payments.paymentDate)='".$month."' GROUP BY payment_day;")->fetchAll(PDO::FETCH_ASSOC);
+		$daywiseQuery = $this->pdo->prepare("SELECT SUM(amount) as total_amount, strftime('%d', paymentDate) as payment_day FROM Payments NATURAL JOIN Customers where strftime('%Y', Payments.paymentDate)=:paymentYear and strftime('%m', Payments.paymentDate)=:paymentMonth GROUP BY payment_day;");
+		$daywiseQuery->execute(array('paymentYear' => $params['drillLabelList'][0], 'paymentMonth' => $month));
+		$daywise = $daywiseQuery->fetchAll(PDO::FETCH_ASSOC);
 		$source->clearChart();
 		$source->setLabels(ArrayUtils::pluck($daywise, 'payment_day'));
 	    $source->addSeries ("sales", "Sales", ArrayUtils::pluck($daywise, "total_amount"), array(
@@ -78,7 +82,9 @@ class LocationDrillDashboard extends StandaloneDashboard {
 	}
 
 	public function get_states ($source, $target, $params) {
-		$stateData = $this->pdo->query("SELECT SUM(amount) as total_amount, state FROM Payments NATURAL JOIN Customers where Customers.country = '".$params['label']."' GROUP BY state;")->fetchAll(PDO::FETCH_ASSOC);
+		$stateDataQuery = $this->pdo->prepare("SELECT SUM(amount) as total_amount, state FROM Payments NATURAL JOIN Customers where Customers.country = :paymentCountry GROUP BY state;");
+		$stateDataQuery->execute(array('paymentCountry' => $params['label']));
+		$stateData = $stateDataQuery->fetchAll(PDO::FETCH_ASSOC);
 		$source->clearChart();
 		$source->setLabels(ArrayUtils::pluck($stateData, 'state'));
 	    $source->addSeries ("sales", "Sales", ArrayUtils::pluck($stateData, "total_amount"), array(
@@ -87,7 +93,9 @@ class LocationDrillDashboard extends StandaloneDashboard {
 	}
 
 	public function get_cities ($source, $target, $params) {
-		$cityData = $this->pdo->query("SELECT SUM(amount) as total_amount, city FROM Payments NATURAL JOIN Customers where Customers.state = '".$params['label']."' GROUP BY city;")->fetchAll(PDO::FETCH_ASSOC);
+		$cityDataQuery = $this->pdo->prepare("SELECT SUM(amount) as total_amount, city FROM Payments NATURAL JOIN Customers where Customers.state = :paymentState GROUP BY city;");
+		$cityDataQuery->execute(array('paymentState' => $params['label']));
+		$cityData = $cityDataQuery->fetchAll(PDO::FETCH_ASSOC);
 		$source->clearChart();
 		$source->setLabels(ArrayUtils::pluck($cityData, 'city'));
 	    $source->addSeries ("sales", "Sales", ArrayUtils::pluck($cityData, "total_amount"), array(
