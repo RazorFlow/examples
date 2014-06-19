@@ -6,25 +6,25 @@ StandaloneDashboard(function(db){
   kpi.addKPI('beverages', {
     caption: 'Beverages',
     value: 559,
-    numberSuffix: 'units'
+    numberSuffix: ' units'
   });
 
   kpi.addKPI('condiments', {
     caption: 'Condiments',
     value: 507,
-    numberSuffix: 'units'
+    numberSuffix: ' units'
   });
 
   kpi.addKPI('confections', {
     caption: 'Confections',
     value: 386,
-    numberSuffix: 'units'
+    numberSuffix: ' units'
   });
 
   kpi.addKPI('daily_products', {
     caption: 'Daily Products',
     value: 393,
-    numberSuffix: 'units'
+    numberSuffix: ' units'
   });
   db.addComponent (kpi);
 });
