@@ -40,7 +40,7 @@ describe ("KPI Table Tests", function () {
     th.start(done)
       .setContext('.rfKPITableContainer')
       .wait(400)
-      .assertElementExists('.rfKPITable')
+      .assertElementExists('.rfTable')
 
     done()
 
@@ -65,7 +65,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assert(function(contextDiv, success, error) {
         if(contextDiv.children().length === 2) {
@@ -98,7 +98,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assertText("tr:eq(0) .rfKPITableCaption", "Bangalore", { trim: true })
       .assertText("tr:eq(1) .rfKPITableCaption", "Delhi", { trim: true })
@@ -131,7 +131,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assertText("tr:eq(0) .rfKPITableCaption", "Kochi", { trim: true })
       .assertText("tr:eq(0) .rfKPITableValue", "50", { trim: true })
@@ -159,7 +159,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assert(function(contextDiv, success, error) {
         if(contextDiv.children().length === 1) {
@@ -198,7 +198,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assertCSS("tr:eq(0) .rfKPITableCaption", 'color', 'rgb(0, 128, 0)')
       .finish();
@@ -230,7 +230,7 @@ describe ("KPI Table Tests", function () {
     db.embedTo("dbTarget");
 
     th.start(done)
-      .setContext(".rfKPITable tbody")
+      .setContext(".rfTable tbody")
       .wait(400)
       .assertCSS("tr:eq(0) .rfKPITableValue", 'color', 'rgb(0, 128, 0)')
       .finish();
