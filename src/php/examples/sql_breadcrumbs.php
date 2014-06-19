@@ -16,13 +16,23 @@ class LocationDrillDashboard extends StandaloneDashboard {
 			"10" => "Oct",
 			"11" => "Nov",
 			"12" => "Dec"
-		);
+	);
+
+	public function get_country () {
+		$cityData = $this->pdo->query("SELECT SUM(amount) as total_amount, country FROM Payments NATURAL JOIN Customers GROUP BY country;");
+		return $cityData->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function get_year () {
+		$yearData = $this->pdo->query("SELECT SUM(amount) as total_amount, strftime('%Y', paymentDate) as payment_year FROM Payments NATURAL JOIN Customers GROUP BY payment_year;");
+		return $yearData->fetchAll(PDO::FETCH_ASSOC);
+	}
 
 	public function buildDashboard () {
 		$chart = new ChartComponent ('sales1');
-		$chart->setCaption ("Sales by Country");
+		$chart->setCaption ("Sales by Region");
 		$chart->setDimensions (12, 6);
-		$countryData = $this->pdo->query("SELECT SUM(amount) as total_amount, country FROM Payments NATURAL JOIN Customers GROUP BY country;")->fetchAll(PDO::FETCH_ASSOC);
+		$countryData = $this->get_country();
 		$chart->setLabels(ArrayUtils::pluck($countryData, 'country'));
 		$chart->addSeries ("sales", "Sales", ArrayUtils::pluck($countryData, "total_amount"), array(
 			'numberPrefix' => "$"
@@ -34,7 +44,7 @@ class LocationDrillDashboard extends StandaloneDashboard {
 		$yearwise = new ChartComponent('year');
 		$yearwise->setCaption("Sales by Time");
 		$yearwise->setDimensions(12,6);
-		$yearData = $this->pdo->query("SELECT SUM(amount) as total_amount, strftime('%Y', paymentDate) as payment_year FROM Payments NATURAL JOIN Customers GROUP BY payment_year;")->fetchAll(PDO::FETCH_ASSOC);
+		$yearData = $this->get_year();
 		$yearwise->setLabels(ArrayUtils::pluck($yearData, 'payment_year'));
 		$yearwise->addSeries ("sales", "Sales", ArrayUtils::pluck($yearData, "total_amount"), array(
 			'numberPrefix' => "$"
