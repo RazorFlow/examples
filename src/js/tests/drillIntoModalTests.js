@@ -53,11 +53,11 @@ describe ("Basic Chart Tests", function () {
 	      .drillContext(".rc-series-1")
 	      .svgTriggerEvent("rect", "click")
 	      .wait(chart_timeout)
-	      .setContext(".k-window")
+	      .setContext(".k-window:eq(1)")
 	      .drillContext(".rc-axis:eq(0)")
 	      .assertText("text:eq(0)", "Beverages")
 	      .assertText("text:eq(1)", "Vegetables")
-	      .setContext(".k-window")
+	      .setContext(".k-window:eq(1)")
 	      .click(".k-i-close")
 	      .finish();
 	});
