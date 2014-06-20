@@ -6,7 +6,6 @@ StandaloneDashboard (function (db) {
 	db.addComponent(chart);
 
 	chart.addDrillStep (function (done, params) {
-	    alert ("Filtering states for country: " + params.label);
 	    chart.setLabels (["State A", "State B"])
 	    chart.addSeries ("sales", "Sales", [4, 3])
 
@@ -14,7 +13,6 @@ StandaloneDashboard (function (db) {
 	});
 
 	chart.addDrillStep (function (done, params) {
-	    alert ("Filtering states for state: " + params.label);
 	    chart.setLabels ([ "City A", "City B", "City C", "City D"])
 	    chart.addSeries ("sales", "Sales", [3, 1, 4, 2])
 
