@@ -19,11 +19,6 @@ class SalesDashboard extends Dashboard {
       "12" => "Dec"
   );
 
-  public function __construct()
-  {
-    $this->initialize();
-  }
-
   public function initialize () {
     $this->pdo = new PDO("sqlite:fixtures/databases/Northwind.sqlite");
   }
@@ -77,23 +72,75 @@ class SalesDashboard extends Dashboard {
     $category->addSeries ("sales", "Sales", $totalSalesArr, array(
       'numberPrefix' => "$"
     ));
-
-    // $category->addComponentKPI("best_selling", array(
-    //   "caption" => "Best Selling Category",
-    //   "value" => $this->get_bestSelling()[0]['CategoryName'],
-    //   "numberPrefix" => "$",
-    //   "numberHumanize" => true
-    // ));
     $this->addComponent ($category);
+
+
+    $table = new TableComponent('table');
+    $table->setCaption("Average Shipping Time");
+    $table->setDimensions(6,4);
+    $ship = $this->get_shipping();
+    $table->addColumn('country', 'Country');
+    $table->addColumn('avg_time','Average Time');
+    $table->addMultipleRows($this->PolulateData($ship));
+
+    $this->addComponent($table);
+
+    $goods = new ChartComponent('goods_sold');
+    $goods->setCaption("Cost of Goods Sold");
+    $goods->setDimensions(12,6);
+    $yearArr = $this->get_yearName();
+    $goods->setLabels(ArrayUtils::pluck($yearArr, 'payment_year'));
+    $goods->setYAxis("Sales", array(
+      "numberHumanize" => true,
+      'numberPrefix' => "$"
+    ));
+
+    $goodsSoldData = $this->get_goodsSold();
+    foreach ($goodsSoldData as $key => $value) {
+      $goods->addSeries ($key, $key, ArrayUtils::pluck($value, "total_amount"), array(
+        'numberPrefix' => "$",
+        'seriesStacked' => true
+      ));  
+    }
+    $this->addComponent ($goods);
+  }
+
+  public function get_shipping () {
+    $yearData = $this->pdo->query('SELECT AVG(JULIANDAY(ShippedDate) - JULIANDAY(OrderDate)) as Time, ShipCountry FROM "Order" group by ShipCountry;');
+    return $yearData->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function PolulateData ($shipping) {
+    $data = array();
+    for($i=0; $i<count($shipping);$i++){
+      $d = array(
+        'country' => $shipping[$i]['ShipCountry'],
+        'avg_time' => floor($shipping[$i]['Time'])." Days"
+      );
+
+      $data []= $d;
+    }
+    return $data;
+  }
+
+  public function get_yearName () {
+    return $this->pdo->query("SELECT strftime('%Y', OrderDate) as payment_year  FROM 'Order' group by payment_year;")->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function get_goodsSold () {
+    $categorylist = $this->pdo->query('Select CategoryName from Category group by CategoryName;')->fetchAll(PDO::FETCH_ASSOC);
+    $data=[];
+    foreach ($categorylist as $key => $value) {
+      $yearDataQuery = $this->pdo->prepare("SELECT strftime('%Y', OrderDate) as payment_year,SUM(od.UnitPrice * od.Quantity)  as total_amount, c.CategoryName  FROM 'Order' as o, 'OrderDetail' as od, 'Category' as c, 'Product' as p where o.Id = od.OrderId and c.Id = p.CategoryId and  od.ProductId = p.Id and c.CategoryName = :category group by payment_year;");
+    $yearDataQuery->execute(array('category' => $value['CategoryName']));
+    $yearData = $yearDataQuery->fetchAll(PDO::FETCH_ASSOC);
+    $data[$value['CategoryName']] = $yearData;
+    }
+    return $data;
   }
 
   public function get_category () {
     $yearData = $this->pdo->query("select SUM(o.UnitPrice * o.Quantity) as total_amount, CategoryName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id group by CategoryName;");
-    return $yearData->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  public function get_bestSelling () {
-    $yearData = $this->pdo->query("select SUM(o.UnitPrice * o.Quantity) as total_amount, CategoryName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id group by CategoryName order by total_amount DESC LIMIT 1;");
     return $yearData->fetchAll(PDO::FETCH_ASSOC);
   }
 
@@ -164,14 +211,17 @@ class SalesDashboard extends Dashboard {
   }
 }
 
+require 'motherboard_stock.php';
 
 
 class SampleDashboard extends TabbedDashboard {
 
   public function buildDashboard() {
-    $a = new SalesDashboard();
+    $sales = new SalesDashboard();
+    $stock = new StockDashboard();
 
-    $this->addDashboardTab($a);
+    $this->addDashboardTab($sales);
+    $this->addDashboardTab($stock);
   }
 
 }
