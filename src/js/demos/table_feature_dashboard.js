@@ -6,6 +6,7 @@
     } 
 */
 StandaloneDashboard(function (db) {
+    var _ = rf._;
     db.setDashboardTitle('Table In Razorfow');
     
     var c1 = new TableComponent();

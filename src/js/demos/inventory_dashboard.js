@@ -5,32 +5,36 @@
         "desc": "Some paragraph of text goes here."
     } 
 */
-var randomGen = function(num, max) {
-    var arr = [];
-    for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));
-    return arr;
-};
-
-
-var getProductInventory = function(list, category) {
-    var products = _.where(list, {'CategoryName': category});
-    var total = _.reduce(products, function(mem, num) {
-        var _mem = typeof mem === 'object' ? +mem.UnitsInStock : mem; 
-        return _mem + (+num.UnitsInStock);
-    });
-    return total;
-};
-
-var getProductValue = function(list, category) {
-    var products = _.where(list, {'CategoryName': category});
-    var total = _.reduce(products, function(mem, num) {
-        var _mem = typeof mem === 'object' ? +mem.UnitsInStock * +mem.UnitPrice : mem; 
-        return Math.floor(_mem + (+num.UnitsInStock * +num.UnitPrice));
-    });
-    return total;
-};
+    
 
 StandaloneDashboard(function (db) {
+    var _ = rf._;
+
+    var randomGen = function(num, max) {
+        var arr = [];
+        for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));
+        return arr;
+    };
+
+
+    var getProductInventory = function(list, category) {
+        var products = _.where(list, {'CategoryName': category});
+        var total = _.reduce(products, function(mem, num) {
+            var _mem = typeof mem === 'object' ? +mem.UnitsInStock : mem; 
+            return _mem + (+num.UnitsInStock);
+        });
+        return total;
+    };
+
+    var getProductValue = function(list, category) {
+        var products = _.where(list, {'CategoryName': category});
+        var total = _.reduce(products, function(mem, num) {
+            var _mem = typeof mem === 'object' ? +mem.UnitsInStock * +mem.UnitPrice : mem; 
+            return Math.floor(_mem + (+num.UnitsInStock * +num.UnitPrice));
+        });
+        return total;
+    };
+    
     var categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     // db.setDashboardTitle('Inventory Dashboard');
 

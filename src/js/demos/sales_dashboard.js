@@ -5,28 +5,32 @@
         "desc": "Some paragraph of text goes here."
     } 
 */
-var randomGen = function(num, max) {
-    var arr = [];
-    for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));
-    return arr;
-};
-
-function average (arr)
-{
-    return _.reduce(arr, function(memo, num)
-    {
-        return memo + num;
-    }, 0) / arr.length;
-}
-function sum (arr)
-{
-    return _.reduce(arr, function(memo, num)
-    {
-        return memo + num;
-    }, 0);
-}
+    
 
 StandaloneDashboard(function (db) {
+    var _ = rf._;
+
+    var randomGen = function(num, max) {
+        var arr = [];
+        for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));
+        return arr;
+    };
+
+    function average (arr)
+    {
+        return _.reduce(arr, function(memo, num)
+        {
+            return memo + num;
+        }, 0) / arr.length;
+    }
+    function sum (arr)
+    {
+        return _.reduce(arr, function(memo, num)
+        {
+            return memo + num;
+        }, 0);
+    }
+
     db.setDashboardTitle('Sales Dashboard');
 
     var c1 = new KPIComponent();

@@ -7,7 +7,7 @@
 */
 StandaloneDashboard(function (db) {
     db.setDashboardTitle('Filter In RazorFlow');
-    
+    var _ = rf._;
     var categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     var c1 = new TableComponent();
     c1.setDimensions(6, 6);

@@ -1,5 +1,6 @@
 describe ("DualY Chart Tests", function () {
     var db;
+    var _ = rf._;
     beforeEach(function () {
         $("#dbTarget").empty().removeClass("");
         $("#dbTarget").css({

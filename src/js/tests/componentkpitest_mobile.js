@@ -1,5 +1,6 @@
 describe ("Component KPI Mobile Tests", function () {
 	var db;
+	var _ = rf._;
 	beforeEach(function () {
 		$("#dbTarget").empty().removeClass("");
 		$("#dbTarget").css({
