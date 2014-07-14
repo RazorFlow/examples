@@ -1,6 +1,10 @@
 /*&
     {
         "id": "table_feature_dashboard",
+        "section": {
+            "id": "feature_demos",
+            "title": "Feature Demos"
+        },
         "title": "Table In Razorfow",
         "desc": "Some paragraph of text goes here."
     } 

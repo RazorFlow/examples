@@ -2,6 +2,10 @@
     {
         "id": "filter_feature_dashboard",
         "title": "Filter In Razorflow",
+        "section": {
+            "id": "feature_demos",
+            "title": "Feature Demos"
+        },
         "desc": "Some paragraph of text goes here."
     } 
 */

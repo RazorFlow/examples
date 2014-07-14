@@ -1,6 +1,10 @@
 /*&
     {
         "id": "sales_dashboard",
+        "section": {
+            "id": "business_demos",
+            "title": "Business Demos"
+        },
         "title": "Sales Dashboard",
         "desc": "Some paragraph of text goes here."
     } 

@@ -1,6 +1,10 @@
 /*&
     {
         "id": "sales_dashboard",
+        "section": {
+            "id": "business_dashboards",
+            "title": "Business Dashboards"
+        },
         "title": "Sales Dashboard",
         "desc": "Some paragraph of text goes here."
     } 
@@ -8,6 +12,8 @@
     
 
 StandaloneDashboard(function (db) {
+
+    console.log('RUnnign');
     var _ = rf._;
 
     var randomGen = function(num, max) {
