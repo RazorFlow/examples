@@ -1,13 +1,4 @@
 <?php
-
-/*&
-    {
-        "id": "php_sales_dashboard",
-        "title": "Sales Dashboard",
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
-
 class SampleDashboard extends StandaloneDashboard {
 
   private function randomGen($num, $max){

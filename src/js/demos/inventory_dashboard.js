@@ -1,16 +1,3 @@
-/*&
-    {
-        "id": "inventory_dashboard",
-        "title": "Inventory Dashboard",
-        "section": {
-            "id": "business_demos",
-            "title": "Business Demos"
-        },
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
-    
-
 StandaloneDashboard(function (db) {
     var _ = rf._;
 

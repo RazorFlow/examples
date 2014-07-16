@@ -1,14 +1,3 @@
-/*&
-    {
-        "id": "sales_dashboard",
-        "section": {
-            "id": "business_demos",
-            "title": "Business Demos"
-        },
-        "title": "Sales Dashboard",
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
 var randomGen = function(num, max) {
     var arr = [];
     for(var i=-1; ++i<num;) arr.push(Math.floor(Math.random() * max));

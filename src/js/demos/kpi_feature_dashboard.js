@@ -1,15 +1,3 @@
-/*&
-    {
-        "id": "kpi_feature_dashboard",
-        "title": "KPI Types",
-        "section": {
-            "id": "feature_demos",
-            "title": "Feature Demos"
-        },
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
-
 StandaloneDashboard(function (db) {
     db.setDashboardTitle('KPI Types Supported in RazorFlow');
 

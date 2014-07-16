@@ -1,13 +1,4 @@
 <?php
-
-/*&
-    {
-        "id": "php_table_feature_dashboard",
-        "title": "Table In Razorfow",
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
-
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $table = new TableComponent("table1");

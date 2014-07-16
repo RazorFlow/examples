@@ -1,13 +1,4 @@
 <?php
-
-/*&
-    {
-        "id": "php_kpi_feature_dashboard",
-        "title": "KPI Types",
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
-
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $kpi1 = new KPIComponent("kpi1");

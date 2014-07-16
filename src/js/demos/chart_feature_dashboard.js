@@ -1,14 +1,3 @@
-/*&
-    {
-        "id": "chart_feature_dashboard",
-        "section": {
-            "id": "feature_demos",
-            "title": "Feature Demos"
-        },
-        "title": "Chart Types",
-        "desc": "Some paragraph of text goes here."
-    } 
-*/
 StandaloneDashboard(function (db) {
     db.setDashboardTitle('Chart Types Supported in Razorflow');
 
