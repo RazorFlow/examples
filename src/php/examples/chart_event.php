@@ -21,8 +21,7 @@ class SampleDashboard extends StandaloneDashboard {
 
   public function handleClick ($source, $targets, $params) {
   	$kpi = $this->getComponentById ('kpi');
-  	$kpi->setCaption ("Year: ".$params['label']);
-  	$kpi->setValue ($params['value'], array('numberPrefix' => '$'));
+  	$kpi->setValue ($params['value']);
   }
 }
 
