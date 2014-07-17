@@ -9,7 +9,7 @@ class SampleDashboard extends StandaloneDashboard {
 		$chart->addSeries ("sales", "Sales", [10, 7, 11]);
 		$chart->addDrillStep ("drill_states", $this);
 		$chart->addDrillStep ("drill_countries", $this);
-		$chart->setStartString("Begin");
+		$chart->setOption("breadcrumbStartString", "go go go");
 		$this->addComponent($chart);
     }
 

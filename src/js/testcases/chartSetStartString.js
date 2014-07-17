@@ -19,5 +19,5 @@ StandaloneDashboard (function (db) {
 	    done (); // This is required
 	});
 
-	chart.setStartString("Zero Drill Level");
+	chart.setOption("breadcrumbStartString", "value");
 });
