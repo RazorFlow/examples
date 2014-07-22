@@ -8,7 +8,7 @@ class SampleDashboard extends StandaloneDashboard {
     $chart->setLabels (["2009", "2010", "2011"]);
     $chart->addSeries ("beverages", "Beverages", [1355, 1916, 1150]);
     $chart->addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321]);
-    $chart->showLegend(false);
+    $chart->setOption ("showLegendFlag", false);
     $this->addComponent ($chart);
   }
 }
