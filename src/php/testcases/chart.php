@@ -8,14 +8,16 @@ class SampleDashboard extends StandaloneDashboard {
         $chart1->setLabels(['Rock', 'Latin', 'Metal', 'Alternative & Punk', 'TV Shows', 'Jazz', 'Blues', 'Drama', 'R&B/Soul', 'Classical']);
         $chart1->addSeries('sales', 'Sales', [826.25, 382.14, 261.36, 241.56, 93.53, 79.20, 60.39, 57.71, 40.59, 40.59]);
         $chart1->setYAxis('', array('numberPrefix' => '$'));
-        $this->addComponent($chart1, 4);
+        $this->addComponent($chart1);
+        $chart1->setComponentOrderIndex(4);
 
         $c2 = new ChartComponent('b');
         $c2->setDimensions(6,4);
         $c2->setCaption('Units By Year');
         $c2->setLabels(['2007', '2008', '2009', '2010', '2011']);
         $c2->addSeries('units', 'Units', [454, 455, 236, 195, 442], array('seriesDisplayType' => 'line'));
-        $this->addComponent($c2, 3);
+        $this->addComponent($c2);
+        $c2->setComponentOrderIndex(3);
 
         $c3 = new ChartComponent('a');
         $c3->setDimensions(6,4);
