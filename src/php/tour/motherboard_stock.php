@@ -24,20 +24,6 @@ class StockDashboard extends Dashboard {
     }
     $this->addComponent($kpi);
 
-    $kpi1 = new KPIGroupComponent('kpi1');
-    $kpi1->setDimensions(12, 2);
-    // $kpi1->setCaption('Units stock by Category');
-    $Units = $this->get_units(false);
-    foreach ($Units as $key => $value) {
-      $kpi1->addKPI($value['id'], array(
-        'caption' => $value['CategoryName'],
-        'value' => $value['Quantity'],
-        'numberSuffix' => ' units',
-        'numberHumanize' => true
-      )); 
-    }
-    $this->addComponent($kpi1);
-
     $table = new TableComponent('table');
     $table->setCaption("List of Item in Stock");
     $table->setDimensions(6,4);
@@ -57,7 +43,7 @@ class StockDashboard extends Dashboard {
     $category = $this->get_category();
     $c12->addSelectFilter('category', 'Select Category', array_merge(['no selection'], ArrayUtils::pluck($category, 'CategoryName')));
     $c12->addTextFilter('contains', 'Product Name Contains');
-    $c12->addNumericRangeFilter('stock', 'Units In Stock');
+    $c12->addNumericRangeFilter('stock', 'Units In Stock' , array(0, 100));
     $this->addComponent($c12);
     $c12->onApplyClick(array($table), 'handleApply', $this);
   }
@@ -116,7 +102,7 @@ class StockDashboard extends Dashboard {
     return $yearData->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function get_stock ($pos) {
+  public function get_stock () {
     $yearData = $this->pdo->query('Select Product.Id, ProductName, CategoryName, UnitPrice, UnitsInStock from Product, Category where Product.Categoryid = Category.Id and Product.UnitsInStock > 0;');
     return $yearData->fetchAll(PDO::FETCH_ASSOC);
   }
