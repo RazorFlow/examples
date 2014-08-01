@@ -1,6 +1,6 @@
 rf.StandaloneDashboard(function(db){
     var chart = new ChartComponent();
-    chart.setDimensions (6, 6);
+    chart.setDimensions (8, 6);
     chart.setYAxis("Revenue", {
         numberPrefix: "$ ",
         numberHumanize: true

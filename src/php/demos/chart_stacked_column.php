@@ -4,7 +4,7 @@ class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $chart = new ChartComponent();
     $chart->setCaption("Visits from search engines");
-    $chart->setDimensions (6, 6);
+    $chart->setDimensions (8, 6);
     $chart->setLabels (["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]);
     $chart->setYAxis("", array(
         "numberPrefix"=> "$"

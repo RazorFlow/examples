@@ -4,7 +4,7 @@ class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
     $chart = new ChartComponent("Sales - 2013 v 2012");
     $chart->setCaption("Company Revenue");
-    $chart->setDimensions (6, 6);
+    $chart->setDimensions (8, 6);
     $chart->setLabels (["Aug", "Sept", "Oct", "Nov", "Dec"]);
     $chart->addSeries ("prod_a", "Product A", [36000, 34300, 30000, 27800, 25000]);
     $chart->addSeries ("prod_b", "Product B", [31000, 29300, 26000, 21000, 20500]);
