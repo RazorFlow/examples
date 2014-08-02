@@ -51,15 +51,15 @@ class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard () {
     $this->setDashboardTitle ("Genresman Dashboard");
 
-    $filter = new FilterComponent('filter1');
-    $filter->setCaption ("Filter Employees");
-    $filter->setDimensions (12, 3);
-    $filter->addDateRangeFilter('datebtw', 'Select Date', array(
+    $form = new FormComponent('form1');
+    $form->setCaption ("Form Employees");
+    $form->setDimensions (12, 3);
+    $form->addDateRangeField('datebtw', 'Select Date', array(
         "defaultStartDate" => "2014-04-23",
         "defaultEndDate" => "2014-05-01"
     ));
 
-    $this->addComponent($filter);
+    $this->addComponent($form);
 
   	$dailySales = new ChartComponent ('c1');
     $dailySales->setDimensions (7, 6);
@@ -132,10 +132,10 @@ class SampleDashboard extends StandaloneDashboard {
     $hour->addSeries ('items', "Items", ArrayUtils::pluck($hourlySales, "CIKIS"));
     $this->addComponent ($hour);
 
-    $filter->onApplyClick (array($dailySales, $item, $chart, $hour), "handleFilter", $this);
+    $form->onApplyClick (array($dailySales, $item, $chart, $hour), "handleForm", $this);
   }
 
-  public function handleFilter ($source, $target, $params) {
+  public function handleForm ($source, $target, $params) {
     $Date = $source->getInputValue('datebtw');
     $dateStartArray = date_parse ( $Date[0] );
     $dateEndArray = date_parse ( $Date[1] );

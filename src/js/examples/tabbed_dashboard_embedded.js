@@ -1,3 +1,4 @@
+var _ = rf._;
 var tdb = new TabbedDashboard();
 tdb.setTabbedDashboardTitle("Tabbed Dashboard");
 

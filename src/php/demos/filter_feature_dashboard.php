@@ -20,12 +20,12 @@ class SampleDashboard extends StandaloneDashboard {
 
     $this->addComponent($c1);
 
-    $c2 = new FilterComponent('filter1');
-    $c2->setCaption("Filter items in stock");
+    $c2 = new FormComponent('form1');
+    $c2->setCaption("Form items in stock");
     $c2->setDimensions (6, 6);
-    $c2->addTextFilter('contains', 'Product Name Contains');
-    $c2->addNumericRangeFilter ('stock', 'Units In Stock', array(10, 100));
-    $c2->addCheckboxFilter ('discontinued', 'Exclude Discontinued Items', false);
+    $c2->addTextField('contains', 'Product Name Contains');
+    $c2->addNumericRangeField ('stock', 'Units In Stock', array(10, 100));
+    $c2->addCheckboxField ('discontinued', 'Exclude Discontinued Items', false);
 
     $this->addComponent($c2);
   }

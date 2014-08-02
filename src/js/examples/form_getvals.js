@@ -1,7 +1,6 @@
-
-StandaloneDashboard(function (db) {
+rf.StandaloneDashboard(function (db) {
     var c1 = new FormComponent();
-    c1.setDimensions(4,4);
+    c1.setDimensions(6,6);
     c1.setCaption('Test Form Component');
 
     c1.addTextField('name', 'Name');
@@ -9,14 +8,13 @@ StandaloneDashboard(function (db) {
     c1.addMultiSelectField('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
     c1.addDateField('delivery_date', 'Delivery Date', {});
     c1.addDateRangeField('grace_period', 'Grace Period', {});
-    c1.addNumericRangeField('units', 'Units in Stock');
+    c1.addNumericRangeField('units', 'Units in Stock', [20, 80], {
+    });
 
     db.addComponent(c1);
 
-    var button = $('<button/>').text('Test');
-    $('body').append(button);
-    button.on('click', function() {
+    c1.onApplyClick(function() {
         var inputValues = c1.getAllInputValues();
-        debugger
+        console.log(inputValues);
     });
 });

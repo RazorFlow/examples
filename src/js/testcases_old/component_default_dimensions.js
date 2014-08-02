@@ -6,15 +6,15 @@ StandaloneDashboard(function (db) {
     chart.addSeries ("packaged_foods", "Packaged Foods", [1513, 976, 1321]);
     db.addComponent (chart);
 
-    var c1 = new FilterComponent();
-    c1.setCaption('Test Filter Component');
+    var c1 = new FormComponent();
+    c1.setCaption('Test Form Component');
 
-    c1.addTextFilter('name', 'Name');
-    c1.addSelectFilter('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {});
-    c1.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
-    c1.addDateFilter('delivery_date', 'Delivery Date', {});
-    c1.addDateRangeFilter('grace_period', 'Grace Period', {});
-    c1.addNumericRangeFilter('units', 'Units in Stock');
+    c1.addTextField('name', 'Name');
+    c1.addSelectField('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {});
+    c1.addMultiSelectField('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
+    c1.addDateField('delivery_date', 'Delivery Date', {});
+    c1.addDateRangeField('grace_period', 'Grace Period', {});
+    c1.addNumericRangeField('units', 'Units in Stock');
 
     db.addComponent(c1);
 

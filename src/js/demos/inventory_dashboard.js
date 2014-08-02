@@ -108,13 +108,13 @@ StandaloneDashboard(function (db) {
     c11.lock();
     db.addComponent(c11);
 
-    var c12 = new FilterComponent();
+    var c12 = new FormComponent();
     c12.setDimensions(6, 6);
-    c12.setCaption('Filter items in stock');
-    c12.addSelectFilter('category', 'Select Category', ['No Selection'].concat(categories));
-    c12.addTextFilter('contains', 'Product Name Contains');
-    c12.addNumericRangeFilter('stock', 'Units In Stock');
-    c12.addCheckboxFilter('discontinued', 'Exclude Discontinued Items', false);
+    c12.setCaption('Form items in stock');
+    c12.addSelectField('category', 'Select Category', ['No Selection'].concat(categories));
+    c12.addTextField('contains', 'Product Name Contains');
+    c12.addNumericRangeField('stock', 'Units In Stock');
+    c12.addCheckboxField('discontinued', 'Exclude Discontinued Items', false);
     db.addComponent(c12);
 
     $.ajax({

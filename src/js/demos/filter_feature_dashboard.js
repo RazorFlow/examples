@@ -1,5 +1,5 @@
 StandaloneDashboard(function (db) {
-    db.setDashboardTitle('Filter In RazorFlow');
+    db.setDashboardTitle('Form In RazorFlow');
     var _ = rf._;
     var categories = ['Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereal', 'Meat/Poultry', 'Produce', 'Seafood'];
     var c1 = new TableComponent();
@@ -19,13 +19,13 @@ StandaloneDashboard(function (db) {
     c1.lock();
     db.addComponent(c1);
 
-    var c2 = new FilterComponent();
+    var c2 = new FormComponent();
     c2.setDimensions(6, 6);
-    c2.setCaption('Filter items in stock');
-    c2.addSelectFilter('category', 'Select Category', ['No Selection'].concat(categories));
-    c2.addTextFilter('contains', 'Product Name Contains');
-    c2.addNumericRangeFilter('stock', 'Units In Stock');
-    c2.addCheckboxFilter('discontinued', 'Exclude Discontinued Items', false);
+    c2.setCaption('Form items in stock');
+    c2.addSelectField('category', 'Select Category', ['No Selection'].concat(categories));
+    c2.addTextField('contains', 'Product Name Contains');
+    c2.addNumericRangeField('stock', 'Units In Stock');
+    c2.addCheckboxField('discontinued', 'Exclude Discontinued Items', false);
     db.addComponent(c2);
 
     $.ajax({

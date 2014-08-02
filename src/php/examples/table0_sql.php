@@ -53,14 +53,14 @@ class SampleDashboard extends StandaloneDashboard {
 
     $this->addComponent($table);
 
-    $filter = new FilterComponent('filter1');
-    $filter->setCaption ("Filter Employees");
-    $filter->setDimensions (4, 4);
-    $filter->addTextFilter ("contains", "City Contains");
+    $form = new FormComponent('form1');
+    $form->setCaption ("Form Employees");
+    $form->setDimensions (4, 4);
+    $form->addTextField ("contains", "City Contains");
 
-    $filter->onApplyClick (array($table), "handleEmployeesSubmit", $this);
+    $form->onApplyClick (array($table), "handleEmployeesSubmit", $this);
 
-    $this->addComponent($filter);
+    $this->addComponent($form);
   }
 
   public function handleEmployeesSubmit ($source, $target, $params) {

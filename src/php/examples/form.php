@@ -2,15 +2,15 @@
 
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
-    $c1 = new FilterComponent("c1");
-    $c1->setCaption("Test Filter Component");
+    $c1 = new FormComponent("c1");
+    $c1->setCaption("Test Form Component");
     $c1->setDimensions (6, 6);
-    $c1->addTextFilter('name', 'Name');
-    $c1->addSelectFilter('products', 'Products', array('Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'), array());
-    $c1->addMultiSelectFilter('cities', 'Cities', array('Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'), array());
-    $c1->addDateFilter('delivery_date', 'Delivery Date', array());
-    $c1->addDateRangeFilter('grace_period', 'Grace Period', array());
-    $c1->addNumericRangeFilter('units', 'Units in Stock', array(0, 100));
+    $c1->addTextField('name', 'Name');
+    $c1->addSelectField('products', 'Products', array('Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'), array());
+    $c1->addMultiSelectField('cities', 'Cities', array('Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'), array());
+    $c1->addDateField('delivery_date', 'Delivery Date', array());
+    $c1->addDateRangeField('grace_period', 'Grace Period', array());
+    $c1->addNumericRangeField('units', 'Units in Stock', array(0, 100));
 
     $kpi = new KPIComponent('kpi1');
     $kpi->setCaption('Stock');

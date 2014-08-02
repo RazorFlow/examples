@@ -1,4 +1,5 @@
 StandaloneDashboard(function (tdb) {
+    var _ = rf._;
 	tdb.setTabbedDashboardTitle("Tabbed Dashboard");
 
 	// Dashboard 1 

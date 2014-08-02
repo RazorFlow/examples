@@ -128,17 +128,17 @@ StandaloneDashboard(function (db) {
         lockingTable.unlock();
     }, 1000);
 
-    var filterComponent = new FilterComponent();
-    filterComponent.setDimensions(6,6);
-    filterComponent.setCaption('Test Filter Component');
+    var formComponent = new FormComponent();
+    formComponent.setDimensions(6,6);
+    formComponent.setCaption('Test Form Component');
 
-    filterComponent.addTextFilter('name', 'Name');
-    filterComponent.addSelectFilter('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {});
-    filterComponent.addMultiSelectFilter('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
-    filterComponent.addDateFilter('delivery_date', 'Delivery Date', {});
-    filterComponent.addDateRangeFilter('grace_period', 'Grace Period', {});
-    filterComponent.addNumericRangeFilter('units', 'Units in Stock');
+    formComponent.addTextField('name', 'Name');
+    formComponent.addSelectField('products', 'Products', ['Beverages', 'Chips', 'Cookies', 'Cakes', 'Dairy Products', 'Poultry'], {});
+    formComponent.addMultiSelectField('cities', 'Cities', ['Bangalore', 'San Fransisco', 'New York', 'Melbourne', 'London', 'Rio De Jeneiro'], {});
+    formComponent.addDateField('delivery_date', 'Delivery Date', {});
+    formComponent.addDateRangeField('grace_period', 'Grace Period', {});
+    formComponent.addNumericRangeField('units', 'Units in Stock');
 
-    db.addComponent(filterComponent);
+    db.addComponent(formComponent);
 
 });

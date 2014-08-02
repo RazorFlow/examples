@@ -37,13 +37,13 @@ class StockDashboard extends Dashboard {
 
     $this->addComponent($table);
 
-    $c12 = new FilterComponent('filter');
+    $c12 = new FormComponent('form');
     $c12->setDimensions(6, 6);
-    $c12->setCaption('Filter items in stock');
+    $c12->setCaption('Form items in stock');
     $category = $this->get_category();
-    $c12->addSelectFilter('category', 'Select Category', array_merge(['no selection'], ArrayUtils::pluck($category, 'CategoryName')));
-    $c12->addTextFilter('contains', 'Product Name Contains');
-    $c12->addNumericRangeFilter('stock', 'Units In Stock' , array(0, 100));
+    $c12->addSelectField('category', 'Select Category', array_merge(['no selection'], ArrayUtils::pluck($category, 'CategoryName')));
+    $c12->addTextField('contains', 'Product Name Contains');
+    $c12->addNumericRangeField('stock', 'Units In Stock' , array(0, 100));
     $this->addComponent($c12);
     $c12->onApplyClick(array($table), 'handleApply', $this);
   }
@@ -66,10 +66,10 @@ class StockDashboard extends Dashboard {
 
   public function handleApply($source, $target, $params) {
     $table = $this->getComponentByID('table');
-    $filter = $this->getComponentByID('filter');
-    $category = $filter->getInputValue('category')['text'];
-    $contains = $filter->getInputValue('contains');
-    $stock = $filter->getInputValue('stock');
+    $form = $this->getComponentByID('form');
+    $category = $form->getInputValue('category')['text'];
+    $contains = $form->getInputValue('contains');
+    $stock = $form->getInputValue('stock');
     $data = $this->get_data($category, $contains, $stock);
     $table->clearRows();
     $table->addMultipleRows($this->PolulateData($data));

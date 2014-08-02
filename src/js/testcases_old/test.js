@@ -52,20 +52,20 @@ StandaloneDashboard(function (db) {
     // db.addComponent(c4);
     
 
-    // var filter = new FilterComponent();
-    // filter.setDimensions(6,6);
-    // filter.setCaption('A test filter component');
-    // filter.addTextFilter('name', 'Enter your name');
-    // filter.addSelectFilter('category', 'Enter your category', ['Dragon', 'Horse', 'Cat', 'Dog', 'Human']);
-    // filter.addMultiSelectFilter('multi', 'Enter your category', ['Dragon', 'Horse', 'Cat', 'Dog', 'Human']);
-    // filter.addDateFilter('delivery', 'Delivery Date');
-    // filter.addDateRangeFilter('daterange', 'Delivery Range');
-    // filter.addNumericRangeFilter('unitrange', 'Units Range');
-    // filter.addCheckboxFilter('truthtest', 'Did you take this form seriously?');
-    // filter.onApplyClicked(function(obj) {
+    // var form = new FormComponent();
+    // form.setDimensions(6,6);
+    // form.setCaption('A test form component');
+    // form.addTextField('name', 'Enter your name');
+    // form.addSelectField('category', 'Enter your category', ['Dragon', 'Horse', 'Cat', 'Dog', 'Human']);
+    // form.addMultiSelectField('multi', 'Enter your category', ['Dragon', 'Horse', 'Cat', 'Dog', 'Human']);
+    // form.addDateField('delivery', 'Delivery Date');
+    // form.addDateRangeField('daterange', 'Delivery Range');
+    // form.addNumericRangeField('unitrange', 'Units Range');
+    // form.addCheckboxField('truthtest', 'Did you take this form seriously?');
+    // form.onApplyClicked(function(obj) {
     //     debugger
     // });
-    // db.addComponent(filter);
+    // db.addComponent(form);
 //                 setTimeout(function () {
 //                     // c1.setValue(55);
 //                     // c1.unlock();

@@ -20,7 +20,7 @@ class SampleDashboard extends StandaloneDashboard {
   public function handleItemClick ($source, $targets, $params) {
     $targetChart = $this->getComponentByID('targetChart');
     $targetChart->setCaption ("Zone-wise breakdown of " . $params['label']);
-    // You can filter/process the data as required.
+    // You can form/process the data as required.
     $targetChart->setLabels (["North Zone", "South Zone"]);
     $targetChart->addSeries ("sales", "Sales", [21, 46]);
     $targetChart->showAsModal();
