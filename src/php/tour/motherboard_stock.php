@@ -5,7 +5,7 @@ class StockDashboard extends Dashboard {
   protected $pdo;
 
   public function initialize () {
-    $this->pdo = new PDO("sqlite:fixtures/databases/Northwind.sqlite");
+    $this->pdo = new PDO("sqlite:".$_SERVER['DOCUMENT_ROOT']."/static/fixtures/Northwind.sqlite");
   }
 
   public function buildDashboard(){
@@ -17,7 +17,7 @@ class StockDashboard extends Dashboard {
     foreach ($Units as $key => $value) {
       $kpi->addKPI($value['id'], array(
         'caption' => $value['CategoryName'],
-        'value' => $value['Quantity']/10,
+        'value' => $value['Quantity'],
         'numberSuffix' => ' units',
         'numberHumanize' => true
       )); 
@@ -37,9 +37,9 @@ class StockDashboard extends Dashboard {
 
     $this->addComponent($table);
 
-    $c12 = new FormComponent('form');
+    $c12 = new FormComponent('filter');
     $c12->setDimensions(6, 6);
-    $c12->setCaption('Form items in stock');
+    $c12->setCaption('Filter items in stock');
     $category = $this->get_category();
     $c12->addSelectField('category', 'Select Category', array_merge(['no selection'], ArrayUtils::pluck($category, 'CategoryName')));
     $c12->addTextField('contains', 'Product Name Contains');
@@ -66,10 +66,10 @@ class StockDashboard extends Dashboard {
 
   public function handleApply($source, $target, $params) {
     $table = $this->getComponentByID('table');
-    $form = $this->getComponentByID('form');
-    $category = $form->getInputValue('category')['text'];
-    $contains = $form->getInputValue('contains');
-    $stock = $form->getInputValue('stock');
+    $filter = $this->getComponentByID('filter');
+    $category = $filter->getInputValue('category')['text'];
+    $contains = $filter->getInputValue('contains');
+    $stock = $filter->getInputValue('stock');
     $data = $this->get_data($category, $contains, $stock);
     $table->clearRows();
     $table->addMultipleRows($this->PolulateData($data));
@@ -95,9 +95,9 @@ class StockDashboard extends Dashboard {
 
   public function get_units ($pos) {
     if ($pos) {
-      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity DESC LIMIT 3;');
+      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity DESC LIMIT 5;');
     } else {
-      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity LIMIT 3;');
+      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity LIMIT 5;');
     }
     return $yearData->fetchAll(PDO::FETCH_ASSOC);
   }
