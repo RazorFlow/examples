@@ -1,5 +1,5 @@
 <?php
-
+require $_SERVER['DOCUMENT_ROOT']."/static/transfer/build/razorflow_php/razorflow.php";
 class StockDashboard extends Dashboard {
   
   protected $pdo;
@@ -10,6 +10,7 @@ class StockDashboard extends Dashboard {
 
   public function buildDashboard(){
     $this->setDashboardTitle("Stock Dashboard");
+    $this->setActionPath("/static/transfer/build/tour/motherboard_stock_action.php");
     $kpi = new KPIGroupComponent('kpi');
     $kpi->setDimensions(12, 2);
     $kpi->setCaption('Units stock by Category');
@@ -26,7 +27,7 @@ class StockDashboard extends Dashboard {
 
     $table = new TableComponent('table');
     $table->setCaption("List of Item in Stock");
-    $table->setDimensions(6,4);
+    $table->setDimensions(6,5);
     $stock = $this->get_stock();
     $table->addColumn('id', 'Product Id');
     $table->addColumn('name','Product Name');
@@ -38,7 +39,7 @@ class StockDashboard extends Dashboard {
     $this->addComponent($table);
 
     $c12 = new FormComponent('filter');
-    $c12->setDimensions(6, 6);
+    $c12->setDimensions(6, 5);
     $c12->setCaption('Filter items in stock');
     $category = $this->get_category();
     $c12->addSelectField('category', 'Select Category', array_merge(['no selection'], ArrayUtils::pluck($category, 'CategoryName')));
@@ -94,11 +95,7 @@ class StockDashboard extends Dashboard {
   }
 
   public function get_units ($pos) {
-    if ($pos) {
-      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity DESC LIMIT 5;');
-    } else {
-      $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity LIMIT 5;');
-    }
+    $yearData = $this->pdo->query('Select c.Id as id, SUM(UnitsInStock)as Quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName order by Quantity DESC LIMIT 5;');
     return $yearData->fetchAll(PDO::FETCH_ASSOC);
   }
 

@@ -1,5 +1,6 @@
-<?php
 
+<?php
+require $_SERVER['DOCUMENT_ROOT']."/static/transfer/build/razorflow_php/razorflow.php";
 class SalesDashboard extends Dashboard {
   
   protected $pdo;
@@ -26,7 +27,7 @@ class SalesDashboard extends Dashboard {
   public function buildDashboard() {
 
     $this->setDashboardTitle("Sales Dashboard");
-
+    $this->setActionPath("/static/transfer/build/tour/motherboard_action.php");
 
     // $yearwise = new ChartComponent ('yearly_sales');
     // $yearwise->setCaption ("Yearly Sales");
@@ -81,6 +82,7 @@ class SalesDashboard extends Dashboard {
 
     $totalUnitsArr = ArrayUtils::pluck($quantityData, "total_quantity");
     $category->addSeries ("units", "Units in Inventory", $totalUnitsArr, array(
+      "seriesDisplayType" => "line",
       "yAxis" => 'unitsAx'
     ));
 
@@ -99,14 +101,25 @@ class SalesDashboard extends Dashboard {
     $this->addComponent ($category);
 
 
+    $chart = new ChartComponent("Customer_satisfaction");
+    $chart->setCaption("Customer Satisfaction");
+    $chart->setDimensions (6, 6);
+    $chart->setLabels (["Neutral", "Satisfied", "Very Satisfied"  , "Very Unsatisfied", "UnSatisfied"]);
+    $chart->setPieValues ([25, 25, 36, 4, 10], array(
+      "numberSuffix" => "%"
+    ));
+
+    $this->addComponent ($chart);
+
+
     $table = new TableComponent('table');
     $table->setCaption("Average Shipping Time");
     $table->setDimensions(6,6);
     $ship = $this->get_shipping();
     $table->addColumn('country', 'Country');
-    $table->addColumn('avg_time','Average Time');
+    $table->addColumn('avg_time','Average Time (In Days)', array("dataType" => "number", "textAlign" => "right"));
     $table->addMultipleRows($this->PolulateData($ship));
-
+    $table->setRowsPerPage(12);
     $this->addComponent($table);
 
     $goods = new ChartComponent('goods_sold');
@@ -139,7 +152,7 @@ class SalesDashboard extends Dashboard {
     for($i=0; $i<count($shipping);$i++){
       $d = array(
         'country' => $shipping[$i]['ShipCountry'],
-        'avg_time' => floor($shipping[$i]['Time'])." Days"
+        'avg_time' => floor($shipping[$i]['Time'])
       );
 
       $data []= $d;
@@ -178,9 +191,9 @@ class SalesDashboard extends Dashboard {
     $yearData->execute(array('catName' => $params['label']));
     $prodWise = $yearData->fetchAll(PDO::FETCH_ASSOC);
     $source->clearChart();
-    $labelArr = ArrayUtils::pluck($monthwise, 'ProductName');
-    $source->setLabels($monthArr);
-    $totalSalesArr = ArrayUtils::pluck($monthwise, "total_amount");
+    $labelArr = ArrayUtils::pluck($prodWise, 'ProductName');
+    $source->setLabels($labelArr);
+    $totalSalesArr = ArrayUtils::pluck($prodWise, "total_amount");
     $source->addSeries ("sales", "Sales", $totalSalesArr, array(
       'numberPrefix' => "$"
     ));
