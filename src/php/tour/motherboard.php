@@ -69,12 +69,12 @@ class SalesDashboard extends Dashboard {
     $categoryData = $this->get_category();
     $quantityData = $this->get_units();
     $category->setLabels(ArrayUtils::pluck($categoryData, 'CategoryName'));
-    $category->setYAxis("Cost of Inventory", array(
+    $category->setYAxis("Sales", array(
       "numberHumanize" => true,
       'numberPrefix' => "$"
     ));
     $totalSalesArr = ArrayUtils::pluck($categoryData, "total_amount");
-    $category->addSeries ("sales", "Cost of Inventory", $totalSalesArr, array(
+    $category->addSeries ("sales", "Sales", $totalSalesArr, array(
       'numberPrefix' => "$"
     ));
 
@@ -89,7 +89,7 @@ class SalesDashboard extends Dashboard {
     $category->addDrillStep("get_prod", $this);
 
     $category->addComponentKPI("cost", array(
-      "caption" => "Total Cost of Inventory",
+      "caption" => "Total Sales",
       "value" => $this->get_cost_inventory(),
       "numberPrefix" => "$"
     ));
@@ -104,11 +104,10 @@ class SalesDashboard extends Dashboard {
     $chart = new ChartComponent("Customer_satisfaction");
     $chart->setCaption("Customer Satisfaction");
     $chart->setDimensions (6, 6);
-    $chart->setLabels (["Neutral", "Satisfied", "Very Satisfied"  , "Very Unsatisfied", "UnSatisfied"]);
-    $chart->setPieValues ([25, 25, 36, 4, 10], array(
+    $chart->setLabels (["Very Unsatisfied", "UnSatisfied", "Neutral", "Satisfied", "Very Satisfied"]);
+    $chart->setPieValues ([4, 10, 25, 25, 36], array(
       "numberSuffix" => "%"
     ));
-
     $this->addComponent ($chart);
 
 
@@ -117,7 +116,7 @@ class SalesDashboard extends Dashboard {
     $table->setDimensions(6,6);
     $ship = $this->get_shipping();
     $table->addColumn('country', 'Country');
-    $table->addColumn('avg_time','Average Time (In Days)', array("dataType" => "number", "textAlign" => "right"));
+    $table->addColumn('avg_time','Average Time', array("textAlign" => "right"));
     $table->addMultipleRows($this->PolulateData($ship));
     $table->setRowsPerPage(12);
     $this->addComponent($table);
@@ -152,7 +151,7 @@ class SalesDashboard extends Dashboard {
     for($i=0; $i<count($shipping);$i++){
       $d = array(
         'country' => $shipping[$i]['ShipCountry'],
-        'avg_time' => floor($shipping[$i]['Time'])
+        'avg_time' => floor($shipping[$i]['Time']). " days"
       );
 
       $data []= $d;
@@ -177,25 +176,43 @@ class SalesDashboard extends Dashboard {
   }
 
   public function get_category () {
-    $yearData = $this->pdo->query("select SUM(o.UnitPrice * o.Quantity) as total_amount, CategoryName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id group by CategoryName;");
-    return $yearData->fetchAll(PDO::FETCH_ASSOC);
+    $catData = $this->pdo->query("select SUM(o.UnitPrice * o.Quantity) as total_amount, CategoryName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id group by CategoryName;");
+    return $catData->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function get_units () {
-    $yearData = $this->pdo->query("select SUM(p.UnitsInStock) as total_quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName;");
-    return $yearData->fetchAll(PDO::FETCH_ASSOC);
+    $unitData = $this->pdo->query("select SUM(p.UnitsInStock) as total_quantity, CategoryName from Product as p, Category as c where c.Id = p.CategoryId group by CategoryName;");
+    return $unitData->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function get_prod ($source, $target, $params) {
-    $yearData = $this->pdo->prepare("select SUM(o.UnitPrice * o.Quantity) as total_amount, ProductName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id  and categoryName=:catName group by ProductName;");
-    $yearData->execute(array('catName' => $params['label']));
-    $prodWise = $yearData->fetchAll(PDO::FETCH_ASSOC);
+    $prodData = $this->pdo->prepare("select SUM(o.UnitPrice * o.Quantity) as total_amount, ProductName from Product as p, Category as c, OrderDetail as o where c.Id = p.CategoryId and o.ProductId = p.Id  and categoryName=:catName group by ProductName;");
+    $prodData->execute(array('catName' => $params['label']));
+    $prodWise = $prodData->fetchAll(PDO::FETCH_ASSOC);
     $source->clearChart();
     $labelArr = ArrayUtils::pluck($prodWise, 'ProductName');
     $source->setLabels($labelArr);
     $totalSalesArr = ArrayUtils::pluck($prodWise, "total_amount");
     $source->addSeries ("sales", "Sales", $totalSalesArr, array(
       'numberPrefix' => "$"
+    ));
+
+    $unitData = $this->pdo->prepare("select p.UnitsInStock as total_quantity, ProductName from Product as p, Category as c where c.Id = p.CategoryId and categoryName=:catName group by ProductName;");
+    $unitData->execute(array('catName' => $params['label']));
+    $unitArr = ArrayUtils::pluck($unitData, "total_quantity");
+    $source->addSeries ("units", "Units in Inventory", $unitArr, array(
+      "seriesDisplayType" => "line",
+      "yAxis" => 'unitsAx'
+    ));
+
+    $source->addComponentKPI("cost", array(
+      "caption" => "Total Sales",
+      "value" => array_sum($totalSalesArr),
+      "numberPrefix" => "$"
+    ));
+    $source->addComponentKPI("units", array(
+      "caption" => "Total Units in Inventory",
+      "value" => array_sum($unitArr)
     ));
   }
 

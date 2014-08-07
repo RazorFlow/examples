@@ -45,7 +45,10 @@ class StockDashboard extends Dashboard {
     $table->addColumn('id', 'Product Id');
     $table->addColumn('name','Product Name');
     $table->addColumn('category','Category');
-    $table->addColumn('price','Price');
+    $table->addColumn('price','Price', array(
+      "dataType"=> "number",
+      "numberPrefix"=> "$"
+    ));
     $table->addColumn('stock','Stock');
     $table->addMultipleRows($this->PolulateData($stock));
 

@@ -1,7 +1,7 @@
 rf.StandaloneDashboard(function(db){
     var chart = new ChartComponent ('chart');
     chart.setDimensions (8, 6);
-    chart.setCaption ('Annual Sales Summary (2010 - 2013');
+    chart.setCaption ('Annual Sales Summary (2010 - 2013)');
     chart.setLabels (['2010', '2011', '2012', '2013']);
     chart.addSeries ('sales', 'Sales', [1160000, 1040000, 1020000, 1160000]);
 
