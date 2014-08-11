@@ -2,7 +2,7 @@
 
 class SampleDashboard extends StandaloneDashboard {
   public function buildDashboard(){
-    $chart = new ChartComponent();
+    $chart = new ChartComponent('chart');
     $chart->setCaption("Costs by division - 2013 v 2012");
     $chart->setDimensions (8, 6);
     $chart->setLabels (['Manufacturing', 'Publishing', 'Transportation', 'Communications']);

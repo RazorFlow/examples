@@ -6,7 +6,14 @@ class SampleDashboard extends StandaloneDashboard {
         $kpi->setCaption("Hello world");
         $kpi->setValue(42, array('valueTextColor' => 'red'));
         $kpi->setDimensions(4, 4);
+
+        $kpi->bindToEvent ("kpiClick", array($kpi), "handleKPIClick", $this);
+
         $this->addComponent ($kpi);
+    }
+
+    public function handleKPIClick($source, $target, $params) {
+      $source->setValue(76);
     }
 }
 
